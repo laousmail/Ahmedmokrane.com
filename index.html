@@ -13,6 +13,7 @@
   <meta property="og:image" content="https://ahmedmokrane.com/img/portrait.webp">
   <meta property="og:url" content="https://ahmedmokrane.com/">
   <meta property="og:locale" content="en_CA">
+  <meta property="og:locale:alternate" content="fr_CA">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ahmed Mokrane · Director &amp; Cinematographer">
   <meta name="twitter:description" content="Where every frame holds a soul. Filmmaker based in Montréal.">
@@ -47,29 +48,51 @@
   <div class="wrap">
     <a class="mark" href="#top" aria-label="Ahmed Mokrane, home">Ahmed Mokrane<i>.</i></a>
     <nav class="nav" aria-label="Primary">
-      <a href="#reel">Reel</a>
-      <a href="#work">Work</a>
-      <a href="#films">Films</a>
-      <a href="#offer">Offer</a>
-      <a href="#approach">Approach</a>
-      <a href="#about">About</a>
+      <a href="#reel" data-i18n="navReel">Reel</a>
+      <a href="#work" data-i18n="navWork">Work</a>
+      <a href="#films" data-i18n="navFilms">Films</a>
+      <a href="#offer" data-i18n="navOffer">Offer</a>
+      <a href="#approach" data-i18n="navApproach">Approach</a>
+      <a href="#about" data-i18n="navAbout">About</a>
     </nav>
-    <a class="btn solid book" href="#contact">Start a brief</a>
-    <button class="btn menu-btn" id="menuOpen" aria-expanded="false" aria-controls="sheet">Menu</button>
+    <div class="chrome-tools">
+      <button type="button" class="sound-btn" id="soundToggle" aria-pressed="false" aria-label="Mute ambiance">
+        <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10v4h3l4 3V7L7 10H4z"/><path d="M15.5 9.5a4 4 0 0 1 0 5"/><path d="M17.5 7a7 7 0 0 1 0 10"/></svg>
+        <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10v4h3l4 3V7L7 10H4z"/><path d="M16 9l5 5M21 9l-5 5"/></svg>
+      </button>
+      <div class="lang" role="group" data-i18n-aria="navLang" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+    </div>
+    <a class="btn solid book" href="#contact" data-i18n="navBrief">Start a brief</a>
+    <button class="btn menu-btn" id="menuOpen" aria-expanded="false" aria-controls="sheet" data-i18n="navMenu">Menu</button>
   </div>
 </header>
 
 <div class="sheet" id="sheet" hidden>
-  <button class="btn close" id="menuClose">Close</button>
+  <button class="btn close" id="menuClose" data-i18n="navClose">Close</button>
   <nav aria-label="Mobile">
-    <a href="#reel">Reel</a>
-    <a href="#work">Work</a>
-    <a href="#films">Films</a>
-    <a href="#live">Live</a>
-    <a href="#offer">Offer</a>
-    <a href="#approach">Approach</a>
-    <a href="#about">About</a>
-    <a class="sheet-cta" href="#contact">Start a brief</a>
+    <a href="#reel" data-i18n="navReel">Reel</a>
+    <a href="#work" data-i18n="navWork">Work</a>
+    <a href="#films" data-i18n="navFilms">Films</a>
+    <a href="#live" data-i18n="navLive">Live</a>
+    <a href="#offer" data-i18n="navOffer">Offer</a>
+    <a href="#approach" data-i18n="navApproach">Approach</a>
+    <a href="#about" data-i18n="navAbout">About</a>
+    <div class="chrome-tools sheet-tools">
+      <button type="button" class="sound-btn" id="soundToggleSheet" aria-pressed="false" aria-label="Mute ambiance">
+        <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10v4h3l4 3V7L7 10H4z"/><path d="M15.5 9.5a4 4 0 0 1 0 5"/><path d="M17.5 7a7 7 0 0 1 0 10"/></svg>
+        <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10v4h3l4 3V7L7 10H4z"/><path d="M16 9l5 5M21 9l-5 5"/></svg>
+      </button>
+      <div class="lang sheet-lang" role="group" data-i18n-aria="navLang" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+    </div>
+    <a class="sheet-cta" href="#contact" data-i18n="navBrief">Start a brief</a>
   </nav>
   <p class="mono dim" style="margin-top:auto">Montréal, Québec · @ahmed.inspires</p>
 </div>
@@ -77,16 +100,16 @@
 <main id="top">
 
   <!-- OPEN: cinematic first screen; subtle camera language on scroll -->
-  <section class="open-stage" id="reel" aria-label="Opening reel">
+  <section class="open-stage" id="reel" data-i18n-aria="reelLabel" aria-label="Opening reel">
     <div class="open-pin" id="reelPin">
       <div class="viewfinder is-bleed" id="viewfinder" role="img" aria-label="Cinematic opening reel">
         <div class="vf-media" id="vfMedia">
-          <img src="img/portrait.webp" alt="" data-beat="0" class="is-active" id="heroImg">
+          <img src="img/post.webp" alt="Ahmed Mokrane, looking toward camera" data-beat="0" class="is-active" id="heroImg">
           <img src="img/concerts.webp" alt="" data-beat="1">
           <img src="img/edm.webp" alt="" data-beat="2">
           <img src="img/sonrie.webp" alt="" data-beat="3">
           <img src="img/music.webp" alt="" data-beat="4">
-          <img src="img/directing.webp" alt="" data-beat="5">
+          <img src="img/portrait.webp" alt="" data-beat="5">
         </div>
         <div class="vf-matte t" id="mt"></div>
         <div class="vf-matte b" id="mb"></div>
@@ -108,18 +131,18 @@
         <div class="open-veil" aria-hidden="true"></div>
         <div class="hero-content">
           <div class="wrap">
-            <p class="mono hero-role reveal-line">Director &amp; Cinematographer · Montréal</p>
+            <p class="mono hero-role reveal-line" data-i18n="heroRole">Director &amp; Cinematographer · Montréal</p>
             <h1 class="hero-brand reveal-line" id="h-brand">Ahmed Mokrane</h1>
-            <p class="hero-line reveal-line">Where every frame holds a <em>soul</em>.</p>
-            <p class="lede reveal-line">Films, music videos and live experiences shaped by emotion, movement and intention.</p>
+            <p class="hero-line reveal-line" data-i18n-html="heroLine">Where every frame holds a <em>soul</em>.</p>
+            <p class="lede reveal-line" data-i18n="heroLede">Films, music videos and live experiences shaped by emotion, movement and intention.</p>
             <div class="ctas reveal-line">
-              <a class="btn solid" href="#work">Explore selected work</a>
-              <a class="btn" href="#contact">Start a project</a>
+              <a class="btn solid" href="#work" data-i18n="heroCtaWork">Explore selected work</a>
+              <a class="btn" href="#contact" data-i18n="heroCtaProject">Start a project</a>
             </div>
           </div>
         </div>
         <div class="hero-scroll-cue" aria-hidden="true">
-          <span class="mono">Scroll</span>
+          <span class="mono" data-i18n="heroScroll">Scroll</span>
           <span class="bar"></span>
         </div>
       </div>
@@ -132,12 +155,12 @@
 
       <div class="timeline-strip soft" id="timelineStrip" aria-hidden="true">
         <div class="tl-track" id="tlTrack">
-          <div class="tl-clip is-hot" data-i="0"><img src="img/portrait.webp" alt=""><span>01</span></div>
+          <div class="tl-clip is-hot" data-i="0"><img src="img/post.webp" alt=""><span>01</span></div>
           <div class="tl-clip" data-i="1"><img src="img/concerts.webp" alt=""><span>02</span></div>
           <div class="tl-clip" data-i="2"><img src="img/edm.webp" alt=""><span>03</span></div>
           <div class="tl-clip" data-i="3"><img src="img/sonrie.webp" alt=""><span>04</span></div>
           <div class="tl-clip" data-i="4"><img src="img/music.webp" alt=""><span>05</span></div>
-          <div class="tl-clip" data-i="5"><img src="img/directing.webp" alt=""><span>06</span></div>
+          <div class="tl-clip" data-i="5"><img src="img/portrait.webp" alt=""><span>06</span></div>
           <div class="tl-playhead" id="playhead"></div>
         </div>
       </div>
@@ -150,7 +173,7 @@
 
   <div class="credits" aria-label="Artists and venues">
     <div class="wrap">
-      <span class="mono dim lbl">Selected collaborators</span>
+      <span class="mono dim lbl" data-i18n="creditsLbl">Selected collaborators</span>
       <span>Soolking</span><span>Amine Radi</span><span>Paul Mirabel</span><span>RaÏFest</span><span>L'Olympia de Montréal</span><span>Place Bell</span><span>Centre Vidéotron</span><span>Rida Amrani</span>
     </div>
   </div>
@@ -160,20 +183,20 @@
     <div class="wrap">
       <div class="head">
         <div>
-          <p class="mono dim kicker-top">Selected work</p>
-          <h2 id="h-work">Frames that carry a <em>feeling</em></h2>
-          <p>Fiction, music videos, concerts, live comedy, documentary and post. Open a title for the story, the role and the footage.</p>
+          <p class="mono dim kicker-top" data-i18n="workKicker">Selected work</p>
+          <h2 id="h-work" data-i18n-html="workTitle">Frames that carry a <em>feeling</em></h2>
+          <p data-i18n="workLede">Fiction, music videos, concerts, live comedy, documentary and post. Open a title for the story, the role and the footage.</p>
         </div>
-        <span class="mono dim">10 projects</span>
+        <span class="mono dim" data-i18n="workCount">10 projects</span>
       </div>
       <div class="filters" role="group" aria-label="Filter projects">
-        <button class="chip" data-f="all" aria-pressed="true">All</button>
-        <button class="chip" data-f="fiction" aria-pressed="false">Fiction</button>
-        <button class="chip" data-f="music" aria-pressed="false">Music videos</button>
-        <button class="chip" data-f="live" aria-pressed="false">Concerts</button>
-        <button class="chip" data-f="comedy" aria-pressed="false">Live comedy</button>
-        <button class="chip" data-f="doc" aria-pressed="false">Documentary</button>
-        <button class="chip" data-f="post" aria-pressed="false">Post</button>
+        <button class="chip" data-f="all" aria-pressed="true" data-i18n="filterAll">All</button>
+        <button class="chip" data-f="fiction" aria-pressed="false" data-i18n="filterFiction">Fiction</button>
+        <button class="chip" data-f="music" aria-pressed="false" data-i18n="filterMusic">Music videos</button>
+        <button class="chip" data-f="live" aria-pressed="false" data-i18n="filterLive">Concerts</button>
+        <button class="chip" data-f="comedy" aria-pressed="false" data-i18n="filterComedy">Live comedy</button>
+        <button class="chip" data-f="doc" aria-pressed="false" data-i18n="filterDoc">Documentary</button>
+        <button class="chip" data-f="post" aria-pressed="false" data-i18n="filterPost">Post</button>
       </div>
       <div class="folio" id="index"></div>
     </div>
@@ -185,9 +208,9 @@
     <div class="wrap">
       <div class="head">
         <div>
-          <p class="mono dim kicker-top">Signature films</p>
-          <h2 id="h-films">Two short <em>films</em></h2>
-          <p>Written and directed by Ahmed. Stories about belonging, passion and the space between what we show and what we feel.</p>
+          <p class="mono dim kicker-top" data-i18n="filmsKicker">Signature films</p>
+          <h2 id="h-films" data-i18n-html="filmsTitle">Two short <em>films</em></h2>
+          <p data-i18n="filmsLede">Written and directed by Ahmed. Stories about belonging, passion and the space between what we show and what we feel.</p>
         </div>
       </div>
     </div>
@@ -196,22 +219,22 @@
       <div class="sig-hero">
         <img src="img/edm.webp" alt="Two men face each other across a split frame, one in shadow, one in warm city light">
         <div class="sig-hero-copy wrap">
-          <p class="mono dim">Short film · Fiction · Montréal</p>
+          <p class="mono dim" data-i18n="edmMeta">Short film · Fiction · Montréal</p>
           <h3 id="h-edm">Entre Deux <em>Mondes</em></h3>
         </div>
       </div>
       <div class="wrap">
         <div class="sig-body">
           <div class="sig-story">
-            <p>An immigrant student in Montréal, building a new life while still tied to the one he left.</p>
-            <p>The film treats immigration as an emotional journey as much as a geographic one: the feeling of living between two realities at once. Identity, belonging and the quiet weight of distance.</p>
+            <p data-i18n="edmP1">An immigrant student in Montréal, building a new life while still tied to the one he left.</p>
+            <p data-i18n="edmP2">The film treats immigration as an emotional journey as much as a geographic one: the feeling of living between two realities at once. Identity, belonging and the quiet weight of distance.</p>
             <dl class="facts">
-              <div><dt>Role</dt><dd>Writer, Director</dd></div>
-              <div><dt>Shot in</dt><dd>Montréal</dd></div>
+              <div><dt data-i18n="role">Role</dt><dd data-i18n="roleWriterDir">Writer, Director</dd></div>
+              <div><dt data-i18n="shotIn">Shot in</dt><dd>Montréal</dd></div>
             </dl>
             <div class="ctas">
-              <button type="button" class="btn solid" data-yt="lpXYwm2c-lg" data-title="Entre Deux Mondes"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg>Watch the film</button>
-              <button type="button" class="btn" data-yt="czXuh4hBuzg" data-title="Entre Deux Mondes teaser">Watch the teaser</button>
+              <button type="button" class="btn solid" data-yt="lpXYwm2c-lg" data-title="Entre Deux Mondes"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 0l9 5-9 5z"/></svg><span data-i18n="watchFilm">Watch the film</span></button>
+              <button type="button" class="btn" data-yt="czXuh4hBuzg" data-title="Entre Deux Mondes teaser" data-i18n="watchTeaser">Watch the teaser</button>
             </div>
           </div>
           <div class="sig-stills" aria-label="Stills from Entre Deux Mondes">
@@ -228,26 +251,26 @@
       <div class="sig-hero">
         <img src="img/sonrie.webp" alt="Painted key art: a man in a black beanie in profile against a dark jungle">
         <div class="sig-hero-copy wrap">
-          <p class="mono dim">Short film · Fiction · Dominican Republic</p>
+          <p class="mono dim" data-i18n="sonMeta">Short film · Fiction · Dominican Republic</p>
           <h3 id="h-son">Sonri<em>é</em></h3>
         </div>
       </div>
       <div class="wrap">
         <div class="sig-body">
           <div class="sig-story">
-            <p>A clown who has lost the passion that once gave his work meaning. His job is to make people smile; he can no longer find his own.</p>
-            <p>Shot in the Dominican Republic, it is a film about loneliness, lost purpose and the search for meaning, and a turning point in Ahmed's work as a narrative director.</p>
+            <p data-i18n="sonP1">A clown who has lost the passion that once gave his work meaning. His job is to make people smile; he can no longer find his own.</p>
+            <p data-i18n="sonP2">Shot in the Dominican Republic, it is a film about loneliness, lost purpose and the search for meaning, and a turning point in Ahmed's work as a narrative director.</p>
             <div class="laurel">
               <svg viewBox="0 0 28 42" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M22 40C8 34 3 22 6 6"/><path d="M6 10c-3-1-5-4-5-7 3 1 5 4 5 7zM5 17c-3 0-5-2-6-5 3 0 5 2 6 5zM6 24c-3 1-5 0-6-3 3-1 5 0 6 3zM9 31c-2 2-5 2-7 0 2-2 5-2 7 0zM14 36c-1 2-4 3-6 2 1-2 4-3 6-2z" fill="currentColor" fill-opacity=".25"/></svg>
-              <div><small>Official selection</small><strong>Top 2 · Mix Film Festival Laval</strong></div>
+              <div><small data-i18n="laurelSmall">Official selection</small><strong>Top 2 · Mix Film Festival Laval</strong></div>
             </div>
             <dl class="facts">
-              <div><dt>Role</dt><dd>Director</dd></div>
-              <div><dt>Shot in</dt><dd>Dominican Republic</dd></div>
+              <div><dt data-i18n="role">Role</dt><dd data-i18n="roleDirector">Director</dd></div>
+              <div><dt data-i18n="shotIn">Shot in</dt><dd data-i18n="locDR">Dominican Republic</dd></div>
             </dl>
             <div class="ctas">
-              <button type="button" class="btn solid" data-yt="BeT4udZhZUc" data-title="Sonrié"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg>Watch the film</button>
-              <button type="button" class="btn" data-yt="czXuh4hBuzg" data-title="Ahmed Mokrane teaser">Watch the teaser</button>
+              <button type="button" class="btn solid" data-yt="BeT4udZhZUc" data-title="Sonrié"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 0l9 5-9 5z"/></svg><span data-i18n="watchFilm">Watch the film</span></button>
+              <button type="button" class="btn" data-yt="czXuh4hBuzg" data-title="Ahmed Mokrane teaser" data-i18n="watchTeaser">Watch the teaser</button>
             </div>
           </div>
           <div class="sig-stills pair" aria-label="Sonrié at the festival">
@@ -264,9 +287,9 @@
     <div class="wrap">
       <div class="head">
         <div>
-          <p class="mono dim kicker-top">Live productions</p>
-          <h2 id="h-live">The room is part of the <em>story</em></h2>
-          <p>Concerts and comedy where the camera anticipates the moment before it happens: stage, crowd, backstage and the reactions in between.</p>
+          <p class="mono dim kicker-top" data-i18n="liveKicker">Live productions</p>
+          <h2 id="h-live" data-i18n-html="liveTitle">The room is part of the <em>story</em></h2>
+          <p data-i18n="liveLede">Concerts and comedy where the camera anticipates the moment before it happens: stage, crowd, backstage and the reactions in between.</p>
         </div>
       </div>
     </div>
@@ -274,9 +297,9 @@
     <div class="live-feature">
       <img src="img/concerts.webp" alt="Ahmed films from the stage edge with a rigged camera while artists perform under truss lights" loading="lazy">
       <div class="wrap live-feature-copy">
-        <p class="mono dim">Concert · Multi-cam</p>
+        <p class="mono dim" data-i18n="soolkingMeta">Concert · Multi-cam</p>
         <h3>Soolking</h3>
-        <p>L'Olympia de Montréal · two shows. Director, audiovisual production.</p>
+        <p data-i18n="soolkingBody">L'Olympia de Montréal · two shows. Director, audiovisual production.</p>
       </div>
     </div>
 
@@ -285,38 +308,38 @@
         <article class="live-card lift">
           <img src="img/amine.webp" alt="Ahmed and Amine Radi backstage during the Montréal tour" loading="lazy">
           <div>
-            <p class="mono dim">Live comedy · 2026</p>
+            <p class="mono dim" data-i18n="amineMeta">Live comedy · 2026</p>
             <h3>Amine Radi</h3>
-            <p>Montréal tour. Director / Filmmaker.</p>
+            <p data-i18n="amineBody">Montréal tour. Director / Filmmaker.</p>
           </div>
         </article>
         <article class="live-card lift">
           <img src="img/mirabel.webp" alt="Paul Mirabel on stage in a blue jersey, red heart balloons behind him" loading="lazy">
           <div>
-            <p class="mono dim">Stand-up · Arena</p>
+            <p class="mono dim" data-i18n="mirabelMeta">Stand-up · Arena</p>
             <h3>Paul Mirabel</h3>
-            <p>Place Bell, Laval · Centre Vidéotron, Québec. Filmmaker.</p>
+            <p data-i18n="mirabelBody">Place Bell, Laval · Centre Vidéotron, Québec. Filmmaker.</p>
           </div>
         </article>
         <article class="live-card text lift">
-          <p class="mono dim">Festival</p>
+          <p class="mono dim" data-i18n="raifestMeta">Festival</p>
           <h3>RaÏFest</h3>
-          <p>Montréal. Director / Filmmaker.</p>
+          <p data-i18n="raifestBody">Montréal. Director / Filmmaker.</p>
         </article>
         <article class="live-card text lift">
           <p class="mono dim">Live comedy · 2026</p>
           <h3>Meriem Benoua</h3>
-          <p>Montréal. Filmmaker.</p>
+          <p data-i18n="meriemBody">Montréal. Filmmaker.</p>
         </article>
         <article class="live-card text lift">
-          <p class="mono dim">Live comedy · 2025</p>
+          <p class="mono dim" data-i18n="camilleMeta">Live comedy · 2025</p>
           <h3>Camille Lorente</h3>
           <p>Montréal. Filmmaker.</p>
         </article>
         <article class="live-card text lift">
-          <p class="mono dim">Concert</p>
+          <p class="mono dim" data-i18n="desiletsMeta">Concert</p>
           <h3>Salle Désilets</h3>
-          <p>Concert series. Director / Filmmaker.</p>
+          <p data-i18n="desiletsBody">Concert series. Director / Filmmaker.</p>
         </article>
       </div>
     </div>
@@ -328,10 +351,10 @@
       <div class="head">
         <div>
           <p class="mono dim kicker-top">Music videos</p>
-          <h2 id="h-mv">Give the song a <em>face</em></h2>
-          <p>Concept, filming and final cut. A visual world built around each artist.</p>
+          <h2 id="h-mv" data-i18n-html="mvTitle">Give the song a <em>face</em></h2>
+          <p data-i18n="mvLede">Concept, filming and final cut. A visual world built around each artist.</p>
         </div>
-        <div class="stat compact"><b>1M+</b><span class="mono dim">views across music video projects</span></div>
+        <div class="stat compact"><b>1M+</b><span class="mono dim" data-i18n="mvViews">views across music video projects</span></div>
       </div>
       <div class="mv-list">
         <article class="mv-item lift">
@@ -342,9 +365,9 @@
           <div class="mv-meta">
             <h3>Ssver n Tmara</h3>
             <p class="artist">Yacine Yafsah</p>
-            <p class="mono dim role">Creative direction · Cinematography · Post</p>
-            <p>Full creative direction and production, from concept to final cut.</p>
-            <button type="button" class="btn" data-yt="vD9WzlaM1D0" data-title="Ssver n Tmara">Watch here</button>
+            <p class="mono dim role" data-i18n="mvRole">Creative direction · Cinematography · Post</p>
+            <p data-i18n="mvBody1">Full creative direction and production, from concept to final cut.</p>
+            <button type="button" class="btn" data-yt="vD9WzlaM1D0" data-title="Ssver n Tmara" data-i18n="watchHere">Watch here</button>
           </div>
         </article>
         <article class="mv-item lift">
@@ -369,7 +392,7 @@
             <h3>Ik Kudi Hundi Si</h3>
             <p class="artist">Inder Khedewala</p>
             <p class="mono dim role">Creative direction · Cinematography · Post</p>
-            <p>The project that started his work directing official music videos.</p>
+            <p data-i18n="mvBody3">The project that started his work directing official music videos.</p>
             <button type="button" class="btn" data-yt="Z76Tm12dh_s" data-title="Ik Kudi Hundi Si">Watch here</button>
           </div>
         </article>
@@ -380,11 +403,11 @@
   <aside class="lead-band" aria-label="Next step">
     <div class="wrap">
       <div>
-        <p class="mono dim">Next step</p>
-        <h2>Have a date, a song, or a <em>stage</em>?</h2>
-        <p>Send a short brief. Ahmed replies with availability and a clear next step.</p>
+        <p class="mono dim" data-i18n="leadKicker">Next step</p>
+        <h2 data-i18n-html="leadTitle">Have a date, a song, or a <em>stage</em>?</h2>
+        <p data-i18n="leadLede">Send a short brief. Ahmed replies with availability and a clear next step.</p>
       </div>
-      <a class="btn solid" href="#contact">Start a brief<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+      <a class="btn solid" href="#contact"><span data-i18n="navBrief">Start a brief</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
     </div>
   </aside>
 
@@ -393,11 +416,11 @@
     <div class="wrap">
       <div class="head">
         <div>
-          <p class="mono dim kicker-top">Offer</p>
-          <h2 id="h-offer">Four disciplines. One <em>eye</em>.</h2>
-          <p>Creative direction from intention to final grade. Choose the path that fits, then start a brief.</p>
+          <p class="mono dim kicker-top" data-i18n="offerKicker">Offer</p>
+          <h2 id="h-offer" data-i18n-html="offerTitle">Four disciplines. One <em>eye</em>.</h2>
+          <p data-i18n="offerLede">Creative direction from intention to final grade. Choose the path that fits, then start a brief.</p>
         </div>
-        <span class="mono dim k">Now booking</span>
+        <span class="mono dim k" data-i18n="offerBooking">Now booking</span>
       </div>
     </div>
 
@@ -405,10 +428,10 @@
       <div class="wrap discipline-grid">
         <figure><img src="img/edm.webp" alt="" loading="lazy"><figcaption class="mono">01</figcaption></figure>
         <div>
-          <h3>Short films</h3>
-          <p>Narrative direction from treatment through picture lock. Fiction with intention in every frame: story, performance and atmosphere held as one.</p>
-          <p class="expect mono dim">You get a filmmaker who shapes the film, not only operates the camera.</p>
-          <a class="offer-cta" href="#contact" data-offer="Short film">Start this brief<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+          <h3 data-i18n="d1Title">Short films</h3>
+          <p data-i18n="d1Body">Narrative direction from treatment through picture lock. Fiction with intention in every frame: story, performance and atmosphere held as one.</p>
+          <p class="expect mono dim" data-i18n="d1Expect">You get a filmmaker who shapes the film, not only operates the camera.</p>
+          <a class="offer-cta" href="#contact" data-offer="Short film"><span data-i18n="startBrief">Start this brief</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
         </div>
       </div>
     </div>
@@ -416,10 +439,10 @@
       <div class="wrap discipline-grid">
         <figure><img src="img/music.webp" alt="" loading="lazy"><figcaption class="mono">02</figcaption></figure>
         <div>
-          <h3>Music videos</h3>
-          <p>A visual identity for the song. Concept, shoot and cut that build a world around the artist, A to Z.</p>
-          <p class="expect mono dim">Creative involvement from first reference to delivery.</p>
-          <a class="offer-cta" href="#contact" data-offer="Music video">Start this brief<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+          <h3 data-i18n="d2Title">Music videos</h3>
+          <p data-i18n="d2Body">A visual identity for the song. Concept, shoot and cut that build a world around the artist, A to Z.</p>
+          <p class="expect mono dim" data-i18n="d2Expect">Creative involvement from first reference to delivery.</p>
+          <a class="offer-cta" href="#contact" data-offer="Music video"><span data-i18n="startBrief">Start this brief</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
         </div>
       </div>
     </div>
@@ -427,10 +450,10 @@
       <div class="wrap discipline-grid">
         <figure><img src="img/concerts.webp" alt="" loading="lazy"><figcaption class="mono">03</figcaption></figure>
         <div>
-          <h3>Concerts &amp; live</h3>
-          <p>Multi-cam coverage that captures the stage, the room and the moments between. Arenas to intimate rooms.</p>
-          <p class="expect mono dim">Direction that makes the audience feel they were there.</p>
-          <a class="offer-cta" href="#contact" data-offer="Concert / live">Start this brief<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+          <h3 data-i18n="d3Title">Concerts &amp; live</h3>
+          <p data-i18n="d3Body">Multi-cam coverage that captures the stage, the room and the moments between. Arenas to intimate rooms.</p>
+          <p class="expect mono dim" data-i18n="d3Expect">Direction that makes the audience feel they were there.</p>
+          <a class="offer-cta" href="#contact" data-offer="Concert / live"><span data-i18n="startBrief">Start this brief</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
         </div>
       </div>
     </div>
@@ -438,10 +461,10 @@
       <div class="wrap discipline-grid">
         <figure><img src="img/directing.webp" alt="" loading="lazy"><figcaption class="mono">04</figcaption></figure>
         <div>
-          <h3>Brand &amp; commercial</h3>
-          <p>Campaign films and brand stories with the same cinematic care as narrative work. Clarity without losing soul.</p>
-          <p class="expect mono dim">A clear creative path from brief to finished film.</p>
-          <a class="offer-cta" href="#contact" data-offer="Brand content">Start this brief<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+          <h3 data-i18n="d4Title">Brand &amp; commercial</h3>
+          <p data-i18n="d4Body">Campaign films and brand stories with the same cinematic care as narrative work. Clarity without losing soul.</p>
+          <p class="expect mono dim" data-i18n="d4Expect">A clear creative path from brief to finished film.</p>
+          <a class="offer-cta" href="#contact" data-offer="Brand content"><span data-i18n="startBrief">Start this brief</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
         </div>
       </div>
     </div>
@@ -450,23 +473,23 @@
   <!-- APPROACH: manifesto -->
   <section id="approach" class="manifesto" aria-labelledby="h-app">
     <div class="wrap">
-      <p class="mono dim kicker-top">Approach</p>
-      <h2 id="h-app">The camera is a <em>language</em>.</h2>
-      <p class="manifesto-lede">No two projects should look the same. Every story, artist and brief gets its own visual grammar.</p>
+      <p class="mono dim kicker-top" data-i18n="approachKicker">Approach</p>
+      <h2 id="h-app" data-i18n-html="approachTitle">The camera is a <em>language</em>.</h2>
+      <p class="manifesto-lede" data-i18n="approachLede">No two projects should look the same. Every story, artist and brief gets its own visual grammar.</p>
       <div class="grammar">
-        <div><span class="w">Light</span><span class="arrow">creates</span><span class="to">emotion</span></div>
-        <div><span class="w">Composition</span><span class="arrow">creates</span><span class="to">intention</span></div>
-        <div><span class="w">Movement</span><span class="arrow">creates</span><span class="to">energy</span></div>
-        <div><span class="w">Editing</span><span class="arrow">creates</span><span class="to">rhythm</span></div>
+        <div><span class="w" data-i18n="gLight">Light</span><span class="arrow" data-i18n="gCreates">creates</span><span class="to" data-i18n="gEmotion">emotion</span></div>
+        <div><span class="w" data-i18n="gComp">Composition</span><span class="arrow" data-i18n="gCreates">creates</span><span class="to" data-i18n="gIntention">intention</span></div>
+        <div><span class="w" data-i18n="gMove">Movement</span><span class="arrow" data-i18n="gCreates">creates</span><span class="to" data-i18n="gEnergy">energy</span></div>
+        <div><span class="w" data-i18n="gEdit">Editing</span><span class="arrow" data-i18n="gCreates">creates</span><span class="to" data-i18n="gRhythm">rhythm</span></div>
       </div>
-      <blockquote class="central">What should the audience feel when they see this?</blockquote>
-      <p class="mono dim" style="margin-top:var(--s-5)">How a project moves</p>
+      <blockquote class="central" data-i18n="centralQ">What should the audience feel when they see this?</blockquote>
+      <p class="mono dim" style="margin-top:var(--s-5)" data-i18n="howMoves">How a project moves</p>
       <ol class="steps">
-        <li><h4>Understand</h4><p>The story, the message, the audience and the identity behind the project.</p></li>
-        <li><h4>Imagine</h4><p>A visual direction built from references, light, composition, movement and atmosphere.</p></li>
-        <li><h4>Create</h4><p>Preparation on set, with room left for the moments nobody planned.</p></li>
-        <li><h4>Shape</h4><p>Edit and grade, every frame kept faithful to the original intention.</p></li>
-        <li><h4>Make it feel</h4><p>Technical quality is never the goal. The audience should feel something.</p></li>
+        <li><h4 data-i18n="s1">Understand</h4><p data-i18n="s1b">The story, the message, the audience and the identity behind the project.</p></li>
+        <li><h4 data-i18n="s2">Imagine</h4><p data-i18n="s2b">A visual direction built from references, light, composition, movement and atmosphere.</p></li>
+        <li><h4 data-i18n="s3">Create</h4><p data-i18n="s3b">Preparation on set, with room left for the moments nobody planned.</p></li>
+        <li><h4 data-i18n="s4">Shape</h4><p data-i18n="s4b">Edit and grade, every frame kept faithful to the original intention.</p></li>
+        <li><h4 data-i18n="s5">Make it feel</h4><p data-i18n="s5b">Technical quality is never the goal. The audience should feel something.</p></li>
       </ol>
     </div>
   </section>
@@ -480,25 +503,25 @@
           <figcaption class="mono dim">Ahmed Mokrane · Montréal</figcaption>
         </figure>
         <div>
-          <p class="mono dim">About</p>
-          <h2 id="h-about">A life behind the lens. It started when he was <em>three</em>.</h2>
+          <p class="mono dim" data-i18n="aboutKicker">About</p>
+          <h2 id="h-about" data-i18n-html="aboutTitle">A life behind the lens. It started when he was <em>three</em>.</h2>
         </div>
       </div>
       <ol class="chapters">
         <li>
-          <span class="mono dim">01 · Origins · Algeria</span>
-          <h3>Photography first</h3>
-          <p>Growing up in Algeria, photography was his first way of seeing: people, emotion, and the chance to keep a moment alive beyond its time. Photography taught him to observe. Filmmaking taught him to feel, move and tell stories.</p>
+          <span class="mono dim" data-i18n="ch1Meta">01 · Origins · Algeria</span>
+          <h3 data-i18n="ch1Title">Photography first</h3>
+          <p data-i18n="ch1Body">Growing up in Algeria, photography was his first way of seeing: people, emotion, and the chance to keep a moment alive beyond its time. Photography taught him to observe. Filmmaking taught him to feel, move and tell stories.</p>
         </li>
         <li>
-          <span class="mono dim">02 · Turning point · Canada</span>
-          <h3>Starting over</h3>
-          <p>Moving to Canada meant risk, sacrifice and building from the ground up. Through the doubt, the camera stayed constant. One project led to the next, and a passion became a profession.</p>
+          <span class="mono dim" data-i18n="ch2Meta">02 · Turning point · Canada</span>
+          <h3 data-i18n="ch2Title">Starting over</h3>
+          <p data-i18n="ch2Body">Moving to Canada meant risk, sacrifice and building from the ground up. Through the doubt, the camera stayed constant. One project led to the next, and a passion became a profession.</p>
         </li>
         <li>
-          <span class="mono dim">03 · Today · Montréal</span>
-          <h3>Director &amp; Cinematographer</h3>
-          <p>Visual stories across film, live events, music and brands, with one rule: every frame needs intention, emotion and a reason to exist.</p>
+          <span class="mono dim" data-i18n="ch3Meta">03 · Today · Montréal</span>
+          <h3 data-i18n="ch3Title">Director &amp; Cinematographer</h3>
+          <p data-i18n="ch3Body">Visual stories across film, live events, music and brands, with one rule: every frame needs intention, emotion and a reason to exist.</p>
         </li>
       </ol>
     </div>
@@ -509,18 +532,18 @@
     <div class="wrap">
       <div class="head compact">
         <div>
-          <p class="mono dim kicker-top">Camera report</p>
-          <h2 id="h-kit">The package behind the <em>frame</em></h2>
+          <p class="mono dim kicker-top" data-i18n="kitKicker">Camera report</p>
+          <h2 id="h-kit" data-i18n-html="kitTitle">The package behind the <em>frame</em></h2>
         </div>
         <span class="mono dim">Sony Cinema Line · DaVinci Resolve</span>
       </div>
       <div class="report quiet">
-        <div><h4>Cameras</h4><ul><li>Sony FX6</li><li>Sony FX3</li><li>Sony A7S III</li><li>Sony A7 IV</li></ul></div>
-        <div><h4>Lenses</h4><ul><li>Sony G Master</li><li>Production-specific optics</li></ul></div>
-        <div><h4>Audio</h4><ul><li>RØDE NTG4+</li><li>Wireless systems</li><li>Zoom recorders</li></ul></div>
-        <div><h4>Lighting</h4><ul><li>Professional LED</li><li>Projectors</li><li>Multi-light setups</li></ul></div>
-        <div><h4>Aerial</h4><ul><li>Drone cinematography</li></ul></div>
-        <div><h4>Post-production</h4><ul><li>DaVinci Resolve</li></ul></div>
+        <div><h4 data-i18n="kitCam">Cameras</h4><ul><li>Sony FX6</li><li>Sony FX3</li><li>Sony A7S III</li><li>Sony A7 IV</li></ul></div>
+        <div><h4 data-i18n="kitLens">Lenses</h4><ul><li>Sony G Master</li><li data-i18n="kitOptics">Production-specific optics</li></ul></div>
+        <div><h4 data-i18n="kitAudio">Audio</h4><ul><li>RØDE NTG4+</li><li data-i18n="kitWireless">Wireless systems</li><li data-i18n="kitZoom">Zoom recorders</li></ul></div>
+        <div><h4 data-i18n="kitLight">Lighting</h4><ul><li data-i18n="kitLed">Professional LED</li><li data-i18n="kitProj">Projectors</li><li data-i18n="kitMulti">Multi-light setups</li></ul></div>
+        <div><h4 data-i18n="kitAerial">Aerial</h4><ul><li data-i18n="kitDrone">Drone cinematography</li></ul></div>
+        <div><h4 data-i18n="kitPost">Post-production</h4><ul><li>DaVinci Resolve</li></ul></div>
       </div>
     </div>
   </section>
@@ -529,9 +552,9 @@
     <div class="wrap">
       <div class="logo" aria-hidden="true">A</div>
       <div>
-        <p class="mono dim">Production</p>
+        <p class="mono dim" data-i18n="azarKicker">Production</p>
         <h3>Azar Films</h3>
-        <p>The production entity behind cinematic projects. Creative vision stays with the directing and the camera.</p>
+        <p data-i18n="azarBody">The production entity behind cinematic projects. Creative vision stays with the directing and the camera.</p>
       </div>
       <a class="btn" href="https://www.instagram.com/azarfilms.ca/" target="_blank" rel="noopener">@azarfilms.ca</a>
     </div>
@@ -540,47 +563,53 @@
   <!-- CONTACT -->
   <section id="contact" class="contact" aria-labelledby="h-contact">
     <div class="wrap">
-      <p class="mono dim kicker-top">Contact</p>
-      <h2 id="h-contact">Let's make something people <em>feel</em>.</h2>
-      <p class="contact-lead">Tell Ahmed about your project, the story behind it and what you want your audience to experience.</p>
+      <p class="mono dim kicker-top" data-i18n="contactKicker">Contact</p>
+      <h2 id="h-contact" data-i18n-html="contactTitle">Let's make something people <em>feel</em>.</h2>
+      <p class="contact-lead" data-i18n="contactLead">Tell Ahmed about your project, the story behind it and what you want your audience to experience.</p>
       <div class="contact-grid">
         <div>
           <div class="value-props">
-            <div><span class="mono dim">01</span><p>One filmmaker from concept through grade</p></div>
-            <div><span class="mono dim">02</span><p>Clear reply with availability and next steps</p></div>
-            <div><span class="mono dim">03</span><p>Based in Montréal, open to travel</p></div>
+            <div><span class="mono dim">01</span><p data-i18n="vp1">One filmmaker from concept through grade</p></div>
+            <div><span class="mono dim">02</span><p data-i18n="vp2">Clear reply with availability and next steps</p></div>
+            <div><span class="mono dim">03</span><p data-i18n="vp3">Based in Montréal, open to travel</p></div>
           </div>
           <div class="lines">
-            <div class="line"><div><span class="mono dim">Email</span><div class="v" id="email">ahmedmkrne@gmail.com</div></div><button class="copy" type="button" data-copy="ahmedmkrne@gmail.com">Copy</button></div>
-            <div class="line"><div><span class="mono dim">Phone</span><div class="v">+1 (514) 569-8970</div></div><button class="copy" type="button" data-copy="+15145698970">Copy</button></div>
-            <div class="line"><div><span class="mono dim">Instagram</span><div class="v"><a href="https://www.instagram.com/ahmed.inspires/" target="_blank" rel="noopener">@ahmed.inspires</a></div></div><span class="mono dim">↗</span></div>
-            <div class="line"><div><span class="mono dim">Based in</span><div class="v">Montréal, Québec</div></div><span class="mono dim">EST</span></div>
+            <div class="line"><div><span class="mono dim" data-i18n="labelEmail">Email</span><div class="v" id="email">ahmedmkrne@gmail.com</div></div><button class="copy" type="button" data-copy="ahmedmkrne@gmail.com" data-i18n="copyBtn">Copy</button></div>
+            <div class="line"><div><span class="mono dim" data-i18n="labelPhone">Phone</span><div class="v">+1 (514) 569-8970</div></div><button class="copy" type="button" data-copy="+15145698970" data-i18n="copyBtn">Copy</button></div>
+            <div class="line"><div><span class="mono dim" data-i18n="labelIg">Instagram</span><div class="v"><a href="https://www.instagram.com/ahmed.inspires/" target="_blank" rel="noopener">@ahmed.inspires</a></div></div><span class="mono dim">↗</span></div>
+            <div class="line"><div><span class="mono dim" data-i18n="labelBased">Based in</span><div class="v">Montréal, Québec</div></div><span class="mono dim">EST</span></div>
           </div>
         </div>
         <form id="brief" novalidate>
-          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" placeholder="Jane Tremblay" required></div>
-          <div class="field"><label for="f-co">Company / Agency</label><input id="f-co" name="co" autocomplete="organization" placeholder="Optional"></div>
-          <div class="field full"><label for="f-mail">Email</label><input id="f-mail" name="mail" type="email" autocomplete="email" placeholder="you@studio.com" required></div>
-          <div class="field full"><label id="l-type">Project type</label>
+          <div class="field"><label for="f-name" data-i18n="fName">Name</label><input id="f-name" name="name" autocomplete="name" placeholder="Jane Tremblay" required></div>
+          <div class="field"><label for="f-co" data-i18n="fCo">Company / Agency</label><input id="f-co" name="co" autocomplete="organization" placeholder="Optional" data-i18n-placeholder="fCoPh"></div>
+          <div class="field full"><label for="f-mail" data-i18n="fMail">Email</label><input id="f-mail" name="mail" type="email" autocomplete="email" placeholder="you@studio.com" required></div>
+          <div class="field full"><label id="l-type" data-i18n="fType">Project type</label>
             <div class="types" role="group" aria-labelledby="l-type">
-              <button type="button" class="chip" data-t="Short film" aria-pressed="false">Short film</button>
-              <button type="button" class="chip" data-t="Music video" aria-pressed="true">Music video</button>
-              <button type="button" class="chip" data-t="Concert / live" aria-pressed="false">Concert / live</button>
-              <button type="button" class="chip" data-t="Documentary" aria-pressed="false">Documentary</button>
-              <button type="button" class="chip" data-t="Brand content" aria-pressed="false">Brand content</button>
-              <button type="button" class="chip" data-t="Other" aria-pressed="false">Other</button>
+              <button type="button" class="chip" data-t="Short film" aria-pressed="false" data-i18n="typeShort">Short film</button>
+              <button type="button" class="chip" data-t="Music video" aria-pressed="true" data-i18n="typeMusic">Music video</button>
+              <button type="button" class="chip" data-t="Concert / live" aria-pressed="false" data-i18n="typeLive">Concert / live</button>
+              <button type="button" class="chip" data-t="Documentary" aria-pressed="false" data-i18n="typeDoc">Documentary</button>
+              <button type="button" class="chip" data-t="Brand content" aria-pressed="false" data-i18n="typeBrand">Brand content</button>
+              <button type="button" class="chip" data-t="Other" aria-pressed="false" data-i18n="typeOther">Other</button>
             </div>
           </div>
-          <div class="field"><label for="f-date">Shoot date</label><input id="f-date" name="date" placeholder="e.g. March 2027"></div>
-          <div class="field"><label for="f-budget">Budget range</label>
-            <select id="f-budget" name="budget"><option>Let's discuss</option><option>Under $2,500</option><option>$2,500 – $7,500</option><option>$7,500 – $20,000</option><option>$20,000+</option></select></div>
-          <div class="field full"><label for="f-msg">Project description</label><textarea id="f-msg" name="msg" placeholder="The story, the artist, the venue, the mood."></textarea></div>
-          <div class="field full"><label for="f-feel">What should the audience feel?</label><textarea id="f-feel" name="feel" placeholder="The emotion or experience you want them to leave with."></textarea></div>
-          <div class="form-foot"><button class="btn solid" type="submit">Write my brief<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></button><span class="err" id="err" role="alert"></span></div>
+          <div class="field"><label for="f-date" data-i18n="fDate">Shoot date</label><input id="f-date" name="date" placeholder="e.g. March 2027" data-i18n-placeholder="fDatePh"></div>
+          <div class="field"><label for="f-budget" data-i18n="fBudget">Budget range</label>
+            <select id="f-budget" name="budget">
+              <option data-i18n="fBudget0">Let's discuss</option>
+              <option data-i18n="fBudget1">Under $2,500</option>
+              <option data-i18n="fBudget2">$2,500 to $7,500</option>
+              <option data-i18n="fBudget3">$7,500 to $20,000</option>
+              <option data-i18n="fBudget4">$20,000+</option>
+            </select></div>
+          <div class="field full"><label for="f-msg" data-i18n="fMsg">Project description</label><textarea id="f-msg" name="msg" placeholder="The story, the artist, the venue, the mood." data-i18n-placeholder="fMsgPh"></textarea></div>
+          <div class="field full"><label for="f-feel" data-i18n="fFeel">What should the audience feel?</label><textarea id="f-feel" name="feel" placeholder="The emotion or experience you want them to leave with." data-i18n-placeholder="fFeelPh"></textarea></div>
+          <div class="form-foot"><button class="btn solid" type="submit"><span data-i18n="fSubmit">Write my brief</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></button><span class="err" id="err" role="alert"></span></div>
           <div class="brief" id="briefOut" hidden>
-            <span class="mono dim">Your brief · send to ahmedmkrne@gmail.com</span>
+            <span class="mono dim" data-i18n="briefReady">Your brief · send to ahmedmkrne@gmail.com</span>
             <pre id="briefText"></pre>
-            <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn solid" id="copyBrief">Copy brief</button><a class="btn" id="mailBrief" href="#">Open in email</a></div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn solid" id="copyBrief" data-i18n="copyBrief">Copy brief</button><a class="btn" id="mailBrief" href="#" data-i18n="openEmail">Open in email</a></div>
           </div>
         </form>
       </div>
@@ -592,26 +621,26 @@
   <div class="wrap footer-grid">
     <div>
       <span class="mark">Ahmed Mokrane<i>.</i></span>
-      <p class="mono dim">Director &amp; Cinematographer · Montréal</p>
-      <p class="footer-line">Let's make something people <em>feel</em>.</p>
+      <p class="mono dim" data-i18n="footerRole">Director &amp; Cinematographer · Montréal</p>
+      <p class="footer-line" data-i18n-html="footerLine">Let's make something people <em>feel</em>.</p>
     </div>
     <div class="footer-cols">
       <div>
-        <p class="mono dim">Connect</p>
+        <p class="mono dim" data-i18n="footerConnect">Connect</p>
         <a href="https://www.instagram.com/ahmed.inspires/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.instagram.com/azarfilms.ca/" target="_blank" rel="noopener">Azar Films</a>
-        <a href="mailto:ahmedmkrne@gmail.com">Email</a>
+        <a href="mailto:ahmedmkrne@gmail.com" data-i18n="labelEmail">Email</a>
         <a href="tel:+15145698970">+1 (514) 569-8970</a>
       </div>
       <div>
-        <p class="mono dim">On this site</p>
-        <a href="#work">Work</a>
-        <a href="#films">Films</a>
-        <a href="#offer">Offer</a>
-        <a href="#contact">Contact</a>
+        <p class="mono dim" data-i18n="footerOnSite">On this site</p>
+        <a href="#work" data-i18n="footerWork">Work</a>
+        <a href="#films" data-i18n="footerFilms">Films</a>
+        <a href="#offer" data-i18n="footerOffer">Offer</a>
+        <a href="#contact" data-i18n="footerContact">Contact</a>
       </div>
     </div>
-    <p class="mono dim copy">© 2026 Ahmed Mokrane · Montréal</p>
+    <p class="mono dim copy" data-i18n="footerCopy">© 2026 Ahmed Mokrane · Montréal</p>
   </div>
 </footer>
 
@@ -620,11 +649,11 @@
 <div class="player" id="player" hidden role="dialog" aria-modal="true" aria-labelledby="player-title">
   <div class="player-shell">
     <div class="player-bar">
-      <span class="t" id="player-title">Watch</span>
-      <button class="btn" type="button" id="playerClose">Close</button>
+      <span class="t" id="player-title" data-i18n="playerWatch">Watch</span>
+      <button class="btn" type="button" id="playerClose" data-i18n="playerClose">Close</button>
     </div>
     <div class="player-frame" id="playerFrame"></div>
-    <p class="mono player-hint">Playing on this page. Press Esc to close.</p>
+    <p class="mono player-hint" data-i18n="playerHint">Playing on this page. Press Esc to close.</p>
   </div>
 </div>
 
@@ -632,6 +661,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<audio id="ambiance" src="audio/ambiance.mp3" loop preload="auto" playsinline></audio>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

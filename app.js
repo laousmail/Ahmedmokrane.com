@@ -204,15 +204,34 @@ const P = [
 /* ---------- editorial portfolio ---------- */
 const idx = document.getElementById("index");
 const layout = ["", "wide", "tall", "", "wide", "", "tall", "", "wide", ""];
-idx.innerHTML = P.map((p, i) => {
-  const cls = ["folio-item", layout[i] || ""].filter(Boolean).join(" ");
-  return `<article class="${cls}" data-f="${p.f}">
+
+function projectView(p) {
+  const lang = window.AM ? window.AM.currentLang() : "en";
+  const m = (window.AM && window.AM.META[lang] && window.AM.META[lang][p.id]) || {};
+  return {
+    ...p,
+    t: m.t || p.t,
+    c: m.c || p.c,
+    r: m.r || p.r,
+    loc: m.loc || p.loc,
+  };
+}
+
+function renderFolio() {
+  const active = document.querySelector(".filters .chip[aria-pressed='true']");
+  const f = (active && active.dataset.f) || "all";
+  idx.innerHTML = P.map((raw, i) => {
+    const p = projectView(raw);
+    const cls = ["folio-item", layout[i] || ""].filter(Boolean).join(" ");
+    return `<article class="${cls}" data-f="${p.f}" ${f === "all" || p.f === f ? "" : "hidden"}>
     <button type="button" data-id="${p.id}" data-img="${p.img}" aria-label="Open ${p.t}">
       <div class="thumb"><img src="img/${p.img}.webp" alt="" loading="${i < 3 ? "eager" : "lazy"}"></div>
       <div class="meta"><span class="t">${p.t}</span><span class="c">${p.c}</span><span class="r">${p.r}</span></div>
     </button>
   </article>`;
-}).join("");
+  }).join("");
+}
+renderFolio();
 
 document.querySelectorAll(".filters .chip").forEach((b) =>
   b.addEventListener("click", () => {
@@ -264,19 +283,29 @@ idx.addEventListener("click", (e) => {
 /* ---------- case overlay ---------- */
 const caseEl = document.getElementById("case");
 let lastFocus = null;
-function renderCase(p) {
-  const i = P.indexOf(p);
-  const n = P[(i + 1) % P.length];
+function renderCase(raw) {
+  const p = projectView(raw);
+  const i = P.findIndex((x) => x.id === raw.id);
+  const n = projectView(P[(i + 1) % P.length]);
+  const lang = window.AM ? window.AM.currentLang() : "en";
+  const story =
+    (window.AM && window.AM.STORIES[lang] && window.AM.STORIES[lang][raw.id]) || raw.story;
+  const linkLabel = (l) => {
+    if (l === "Watch the film") return tr("watchFilm");
+    if (l === "Watch the teaser") return tr("watchTeaser");
+    if (l === "Start a brief") return tr("navBrief");
+    return l;
+  };
   caseEl.innerHTML = `
-  <div class="case-bar"><div class="wrap"><span class="mono dim">${String(i + 1).padStart(2, "0")} / ${String(P.length).padStart(2, "0")} · ${p.c}</span><button class="btn" id="caseClose">Close</button></div></div>
+  <div class="case-bar"><div class="wrap"><span class="mono dim">${String(i + 1).padStart(2, "0")} / ${String(P.length).padStart(2, "0")} · ${p.c}</span><button class="btn" id="caseClose">${tr("caseClose")}</button></div></div>
   <div class="case-hero ${p.wide ? "" : "portrait"}"><img src="img/${p.img}.webp" alt="${p.t}"></div>
   <div class="wrap">
     <div class="case-body">
-      <div><p class="mono dim">${p.c}</p><h2 id="case-title">${p.t}</h2><div class="story">${p.story.map((s) => `<p>${s}</p>`).join("")}</div></div>
+      <div><p class="mono dim">${p.c}</p><h2 id="case-title">${p.t}</h2><div class="story">${story.map((s) => `<p>${s}</p>`).join("")}</div></div>
       <aside class="case-side">
         <dl class="facts" style="margin:0;border:0;padding:0;grid-template-columns:1fr">
-          <div><dt>Role</dt><dd>${p.r}</dd></div><div><dt>Where</dt><dd>${p.loc}</dd></div>${
-            p.award ? `<div><dt>Recognition</dt><dd style="color:var(--tungsten)">${p.award}</dd></div>` : ""
+          <div><dt>${tr("role")}</dt><dd>${p.r}</dd></div><div><dt>${tr("caseWhere")}</dt><dd>${p.loc}</dd></div>${
+            p.award ? `<div><dt>${tr("caseRecognition")}</dt><dd style="color:var(--tungsten)">${p.award}</dd></div>` : ""
           }
         </dl>
         ${
@@ -284,22 +313,23 @@ function renderCase(p) {
             ? `<div class="ctas">${p.links
                 .map(([l, u], k) => {
                   const id = ytId(u);
+                  const label = linkLabel(l);
                   if (id) {
-                    return `<button type="button" class="btn ${k ? "" : "solid"}" data-yt="${id}" data-title="${p.t}: ${l}">${l}</button>`;
+                    return `<button type="button" class="btn ${k ? "" : "solid"}" data-yt="${id}" data-title="${p.t}: ${label}">${label}</button>`;
                   }
                   if (String(u).startsWith("#")) {
-                    return `<a class="btn ${k ? "" : "solid"}" href="${u}" data-close-case>${l}</a>`;
+                    return `<a class="btn ${k ? "" : "solid"}" href="${u}" data-close-case>${label}</a>`;
                   }
-                  return `<a class="btn ${k ? "" : "solid"}" href="${u}">${l}</a>`;
+                  return `<a class="btn ${k ? "" : "solid"}" href="${u}">${label}</a>`;
                 })
                 .join("")}</div>`
             : ""
         }
       </aside>
     </div>
-    ${p.gal ? `<div class="case-gallery">${p.gal.map((g) => `<img src="img/${g}.webp" alt="Still from ${p.t}" loading="lazy">`).join("")}</div>` : ""}
+    ${p.gal ? `<div class="case-gallery">${p.gal.map((g) => `<img src="img/${g}.webp" alt="${p.t}" loading="lazy">`).join("")}</div>` : ""}
   </div>
-  <div class="case-next"><div class="wrap"><button data-next="${n.id}"><span class="mono dim">Next project</span><span class="t">${n.t} →</span></button></div></div>`;
+  <div class="case-next"><div class="wrap"><button data-next="${n.id}"><span class="mono dim">${tr("caseNext")}</span><span class="t">${n.t} →</span></button></div></div>`;
   caseEl.querySelector("#caseClose").onclick = closeCase;
   caseEl.querySelector("[data-next]").onclick = () => {
     location.hash = n.id;
@@ -446,6 +476,10 @@ if (reduce) setInterval(tick, 1000);
 /* ---------- copy + toast ---------- */
 const toast = document.getElementById("toast");
 let tt;
+function tr(key) {
+  return window.AM && window.AM.t ? window.AM.t(key) : key;
+}
+
 function say(m) {
   toast.textContent = m;
   toast.hidden = false;
@@ -453,7 +487,7 @@ function say(m) {
   tt = setTimeout(() => (toast.hidden = true), 1800);
 }
 function copyText(text, el) {
-  const done = () => say("Copied");
+  const done = () => say(tr("toastCopied"));
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(done, () => sel(el));
   } else sel(el);
@@ -464,7 +498,7 @@ function copyText(text, el) {
     const s = getSelection();
     s.removeAllRanges();
     s.addRange(r);
-    say("Selected. Press copy");
+    say(tr("toastSelect"));
   }
 }
 document.querySelectorAll("[data-copy]").forEach((b) =>
@@ -488,37 +522,38 @@ form.addEventListener("submit", (e) => {
   const mail = (d.get("mail") || "").trim();
   const msg = (d.get("msg") || "").trim();
   if (!name) {
-    err.textContent = "Add your name so Ahmed knows who to reply to.";
+    err.textContent = tr("errName");
     form.querySelector("#f-name").focus();
     return;
   }
   if (!/^\S+@\S+\.\S+$/.test(mail)) {
-    err.textContent = "Add an email address Ahmed can reply to, like you@studio.com.";
+    err.textContent = tr("errMail");
     form.querySelector("#f-mail").focus();
     return;
   }
   if (!msg) {
-    err.textContent = "Describe the project in a sentence or two.";
+    err.textContent = tr("errMsg");
     form.querySelector("#f-msg").focus();
     return;
   }
   const feel = (d.get("feel") || "").trim();
   if (!feel) {
-    err.textContent = "Share what you want the audience to feel.";
+    err.textContent = tr("errFeel");
     form.querySelector("#f-feel").focus();
     return;
   }
   err.textContent = "";
   const co = (d.get("co") || "").trim();
   const date = (d.get("date") || "").trim();
-  const text = `Hi Ahmed,\n\nProject: ${ptype}\nFrom: ${name}${co ? " · " + co : ""}\nReply to: ${mail}\nShoot date: ${date || "Flexible"}\nBudget: ${d.get("budget")}\n\nProject description:\n${msg}\n\nWhat should the audience feel?\n${feel}\n`;
+  const typeLabel = document.querySelector(`.types .chip[data-t="${ptype}"]`)?.textContent.trim() || ptype;
+  const text = `Hi Ahmed,\n\nProject: ${typeLabel}\nFrom: ${name}${co ? " · " + co : ""}\nReply to: ${mail}\nShoot date: ${date || "Flexible"}\nBudget: ${d.get("budget")}\n\n${tr("fMsg")}:\n${msg}\n\n${tr("fFeel")}\n${feel}\n`;
   document.getElementById("briefText").textContent = text;
   document.getElementById("mailBrief").href =
     "mailto:ahmedmkrne@gmail.com?subject=" +
-    encodeURIComponent(ptype + " inquiry · " + name) +
+    encodeURIComponent(typeLabel + " · " + name) +
     "&body=" +
     encodeURIComponent(text);
-  say("Brief ready");
+  say(tr("toastBrief"));
   const out = document.getElementById("briefOut");
   out.hidden = false;
   out.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
@@ -549,62 +584,21 @@ if (!reduce && "IntersectionObserver" in window) {
 }
 
 /* ---------- REEL: cinematic scrub with softened camera language ---------- */
-const TAKES = [
-  {
-    label: "Frame 01",
-    title: "Mark the frame.",
-    sub: "The image finds its ratio.",
-    ratio: 2.39,
-    read: "ISO 800 · T2.8 · 23.976",
-    ar: "2.39:1",
-    guides: 0.25,
-  },
-  {
-    label: "Frame 02 · Live",
-    title: "The room is rolling.",
-    sub: "Stage, crowd and the space between.",
-    ratio: 1.85,
-    read: "ISO 1600 · T2.0 · 23.976",
-    ar: "1.85:1",
-    guides: 0.55,
-  },
-  {
-    label: "Frame 03 · Fiction",
-    title: "Entre Deux Mondes.",
-    sub: "Between two realities at once.",
-    ratio: 2.39,
-    read: "ISO 800 · T1.8 · 23.976",
-    ar: "2.39:1",
-    guides: 0.7,
-  },
-  {
-    label: "Frame 04 · Sonrié",
-    title: "A smile, lost then found.",
-    sub: "Top 2 · Mix Film Festival Laval.",
-    ratio: 1.33,
-    read: "ISO 400 · T4 · 24.000",
-    ar: "1.33:1",
-    guides: 0.65,
-  },
-  {
-    label: "Frame 05 · Music",
-    title: "Give the song a face.",
-    sub: "A visual world for the track.",
-    ratio: 0.8,
-    read: "ISO 3200 · T2.2 · 23.976",
-    ar: "4:5",
-    guides: 0.4,
-  },
-  {
-    label: "Frame 06",
-    title: "Continue below.",
-    sub: "Selected work, films and the brief.",
-    ratio: 1.78,
-    read: "ISO 800 · T2.8 · 23.976",
-    ar: "16:9",
-    guides: 0.2,
-  },
+const TAKE_KEYS = [
+  { label: "take0l", title: "take0t", sub: "take0s", ratio: 2.39, read: "ISO 800 · T2.8 · 23.976", ar: "2.39:1", guides: 0.25 },
+  { label: "take1l", title: "take1t", sub: "take1s", ratio: 1.85, read: "ISO 1600 · T2.0 · 23.976", ar: "1.85:1", guides: 0.55 },
+  { label: "take2l", title: "take2t", sub: "take2s", ratio: 2.39, read: "ISO 800 · T1.8 · 23.976", ar: "2.39:1", guides: 0.7 },
+  { label: "take3l", title: "take3t", sub: "take3s", ratio: 1.33, read: "ISO 400 · T4 · 24.000", ar: "1.33:1", guides: 0.65 },
+  { label: "take4l", title: "take4t", sub: "take4s", ratio: 0.8, read: "ISO 3200 · T2.2 · 23.976", ar: "4:5", guides: 0.4 },
+  { label: "take5l", title: "take5t", sub: "take5s", ratio: 1.78, read: "ISO 800 · T2.8 · 23.976", ar: "16:9", guides: 0.2 },
 ];
+const TAKES = TAKE_KEYS;
+
+function viewportRatio() {
+  const vf = document.getElementById("viewfinder");
+  if (!vf || !vf.clientWidth || !vf.clientHeight) return innerWidth / Math.max(1, innerHeight);
+  return vf.clientWidth / vf.clientHeight;
+}
 
 function applyMattes(ratio) {
   const vf = document.getElementById("viewfinder");
@@ -631,18 +625,20 @@ function applyMattes(ratio) {
   guides.style.inset = `${vt + 10}px ${h + 10}px ${vb + 10}px`;
 }
 
+let reelBeat = 0;
+
 function setBeat(i, progressWithin = 0) {
   const take = TAKES[i];
+  reelBeat = i;
   const imgs = document.querySelectorAll("#vfMedia img");
   imgs.forEach((img, n) => img.classList.toggle("is-active", n === i));
-  document.getElementById("takeLabel").textContent = take.label;
-  document.getElementById("takeTitle").textContent = take.title;
-  document.getElementById("takeSub").textContent = take.sub;
+  document.getElementById("takeLabel").textContent = tr(take.label);
+  document.getElementById("takeTitle").textContent = tr(take.title);
+  document.getElementById("takeSub").textContent = tr(take.sub);
   document.getElementById("camRead").textContent = take.read;
   document.getElementById("arRead").textContent = take.ar;
   document.getElementById("scopeBeat").textContent = String(i + 1).padStart(2, "0");
   document.getElementById("guides").style.opacity = take.guides;
-  applyMattes(take.ratio);
 
   document.querySelectorAll("#beatRail span").forEach((s, n) => s.classList.toggle("on", n === i));
   document.querySelectorAll("#tlTrack .tl-clip").forEach((c, n) => c.classList.toggle("is-hot", n === i));
@@ -671,7 +667,13 @@ function initReel() {
   const heroImg = document.getElementById("heroImg");
 
   if (!reduce && heroImg && typeof gsap !== "undefined") {
-    gsap.fromTo(heroImg, { scale: 1.08 }, { scale: 1.14, duration: 22, ease: "none", yoyo: true, repeat: -1 });
+    const narrow = matchMedia("(max-width: 720px)").matches;
+    gsap.set(heroImg, { transformOrigin: narrow ? "50% 18%" : "50% 24%" });
+    gsap.fromTo(
+      heroImg,
+      { scale: narrow ? 1.06 : 1.03 },
+      { scale: narrow ? 1.1 : 1.06, duration: 24, ease: "none", yoyo: true, repeat: -1 }
+    );
     gsap.to(".reveal-line", {
       opacity: 1,
       y: 0,
@@ -689,6 +691,7 @@ function initReel() {
 
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
     setBeat(0);
+    applyMattes(viewportRatio());
     return;
   }
 
@@ -710,7 +713,8 @@ function initReel() {
   gsap.set([takeLabel, takeTitle, takeSub], { opacity: 0, y: 16 });
   gsap.set([scopeRail, timelineStrip, beatRail], { opacity: 0 });
   setBeat(0);
-  applyMattes(2.6);
+  // Full-bleed first viewport so Ahmed's eyes stay visible before camera framing
+  applyMattes(viewportRatio());
 
   let lastBeat = -1;
   let framed = false;
@@ -768,8 +772,11 @@ function initReel() {
 
       const a = TAKES[i];
       const b = TAKES[Math.min(beats - 1, i + 1)];
-      const ratio = a.ratio + (b.ratio - a.ratio) * local;
-      applyMattes(ratio);
+      const takeRatio = a.ratio + (b.ratio - a.ratio) * local;
+      const own = viewportRatio();
+      // Hold full bleed while brand is on; ease into cinematic mattes as framing begins
+      const matteBlend = Math.min(1, Math.max(0, (brandOut - 0.15) / 0.55));
+      applyMattes(own + (takeRatio - own) * matteBlend);
 
       const active = document.querySelector("#vfMedia img.is-active");
       if (active) {
@@ -781,7 +788,8 @@ function initReel() {
 
   addEventListener("resize", () => {
     const i = Math.max(0, lastBeat);
-    applyMattes(TAKES[i].ratio);
+    const framedNow = pin && pin.classList.contains("is-framed");
+    applyMattes(framedNow ? TAKES[i].ratio : viewportRatio());
   });
 }
 
@@ -808,5 +816,131 @@ document.querySelectorAll("[data-offer]").forEach((a) =>
     selectProjectType(a.dataset.offer);
   })
 );
+
+document.addEventListener("am:lang", () => {
+  renderFolio();
+  if (caseEl && !caseEl.hidden) {
+    const id = location.hash.slice(1);
+    const p = P.find((x) => x.id === id);
+    if (p) renderCase(p);
+  }
+  if (typeof setBeat === "function" && TAKES[reelBeat]) {
+    setBeat(reelBeat);
+  }
+});
+
+/* ---------- ambiance: Echoes of Lumen, soft fade, mute in header ---------- */
+(function initAmbiance() {
+  const audio = document.getElementById("ambiance");
+  const btns = [document.getElementById("soundToggle"), document.getElementById("soundToggleSheet")].filter(Boolean);
+  if (!audio || !btns.length) return;
+
+  const TARGET = 0.6;
+  const FADE_MS = 3200;
+  const STORE = "am-ambiance-muted";
+  let muted = localStorage.getItem(STORE) === "1";
+  let fading = null;
+  let started = false;
+  let unlockBound = false;
+
+  function labelKey() {
+    return muted ? "soundUnmute" : "soundMute";
+  }
+
+  function syncUi() {
+    const label = tr(labelKey());
+    btns.forEach((b) => {
+      b.classList.toggle("is-muted", muted);
+      b.setAttribute("aria-pressed", muted ? "true" : "false");
+      b.setAttribute("aria-label", label);
+    });
+  }
+
+  function fadeTo(target, ms) {
+    if (fading) cancelAnimationFrame(fading);
+    const from = audio.volume;
+    const t0 = performance.now();
+    const dur = Math.max(120, ms);
+    function step(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 2.4);
+      audio.volume = from + (target - from) * eased;
+      if (p < 1) fading = requestAnimationFrame(step);
+      else {
+        audio.volume = target;
+        fading = null;
+      }
+    }
+    fading = requestAnimationFrame(step);
+  }
+
+  async function startPlayback() {
+    if (started || muted) return;
+    try {
+      audio.volume = 0;
+      await audio.play();
+      started = true;
+      fadeTo(TARGET, FADE_MS);
+      unbindUnlock();
+    } catch (_) {
+      bindUnlock();
+    }
+  }
+
+  function onUnlock() {
+    if (muted) return;
+    startPlayback();
+  }
+
+  function bindUnlock() {
+    if (unlockBound) return;
+    unlockBound = true;
+    ["pointerdown", "keydown", "touchstart"].forEach((ev) =>
+      document.addEventListener(ev, onUnlock, { passive: true })
+    );
+  }
+
+  function unbindUnlock() {
+    if (!unlockBound) return;
+    unlockBound = false;
+    ["pointerdown", "keydown", "touchstart"].forEach((ev) =>
+      document.removeEventListener(ev, onUnlock)
+    );
+  }
+
+  function setMuted(next) {
+    muted = !!next;
+    localStorage.setItem(STORE, muted ? "1" : "0");
+    syncUi();
+    if (muted) {
+      fadeTo(0, 480);
+      setTimeout(() => {
+        if (muted) audio.pause();
+      }, 520);
+    } else {
+      started = false;
+      startPlayback().then(() => {
+        if (!audio.paused && audio.volume < TARGET * 0.9) fadeTo(TARGET, 900);
+      });
+    }
+  }
+
+  btns.forEach((b) =>
+    b.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setMuted(!muted);
+    })
+  );
+
+  document.addEventListener("am:lang", syncUi);
+  syncUi();
+
+  if (muted) {
+    audio.pause();
+    audio.volume = 0;
+  } else {
+    startPlayback();
+  }
+})();
 
 initReel();
