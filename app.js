@@ -9,6 +9,50 @@ function ytId(url) {
   return m ? m[1] : null;
 }
 
+const YT_THUMB_Q = ["maxresdefault", "sddefault", "hqdefault", "mqdefault"];
+
+function ytThumbUrl(id, q = "maxresdefault") {
+  return id ? `https://i.ytimg.com/vi/${id}/${q}.jpg` : "";
+}
+
+function primaryYt(p) {
+  for (const link of (p && p.links) || []) {
+    const id = ytId(link[1]);
+    if (id) return id;
+  }
+  return null;
+}
+
+/** Official YouTube thumb with maxres → sd → hq fallback (handles 120px placeholder). */
+function setYtThumb(img, id) {
+  if (!img || !id) return;
+  let i = 0;
+  const apply = () => {
+    img.dataset.ytThumb = id;
+    img.src = ytThumbUrl(id, YT_THUMB_Q[i]);
+  };
+  const advance = () => {
+    if (i >= YT_THUMB_Q.length - 1) return false;
+    i += 1;
+    apply();
+    return true;
+  };
+  img.onload = () => {
+    if (img.naturalWidth <= 120) advance();
+  };
+  img.onerror = () => {
+    advance();
+  };
+  apply();
+}
+
+function bindYtThumbs(root = document) {
+  root.querySelectorAll("img[data-yt-thumb]").forEach((img) => {
+    const id = img.getAttribute("data-yt-thumb");
+    if (id) setYtThumb(img, id);
+  });
+}
+
 const player = document.getElementById("player");
 const playerFrame = document.getElementById("playerFrame");
 const playerTitle = document.getElementById("player-title");
@@ -222,14 +266,19 @@ function renderFolio() {
   const f = (active && active.dataset.f) || "all";
   idx.innerHTML = P.map((raw, i) => {
     const p = projectView(raw);
+    const yt = primaryYt(raw);
     const cls = ["folio-item", layout[i] || ""].filter(Boolean).join(" ");
+    const thumb = yt
+      ? `<img src="${ytThumbUrl(yt)}" data-yt-thumb="${yt}" alt="" loading="${i < 3 ? "eager" : "lazy"}">`
+      : `<img src="img/${p.img}.webp" alt="" loading="${i < 3 ? "eager" : "lazy"}">`;
     return `<article class="${cls}" data-f="${p.f}" ${f === "all" || p.f === f ? "" : "hidden"}>
-    <button type="button" data-id="${p.id}" data-img="${p.img}" aria-label="Open ${p.t}">
-      <div class="thumb"><img src="img/${p.img}.webp" alt="" loading="${i < 3 ? "eager" : "lazy"}"></div>
+    <button type="button" data-id="${p.id}" data-img="${p.img}" ${yt ? `data-yt-id="${yt}"` : ""} aria-label="Open ${p.t}">
+      <div class="thumb">${thumb}${yt ? `<span class="play-badge" aria-hidden="true"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span>` : ""}</div>
       <div class="meta"><span class="t">${p.t}</span><span class="c">${p.c}</span><span class="r">${p.r}</span></div>
     </button>
   </article>`;
   }).join("");
+  bindYtThumbs(idx);
 }
 renderFolio();
 
@@ -267,7 +316,13 @@ idx.addEventListener("pointermove", (e) => {
 idx.addEventListener("pointerover", (e) => {
   const b = e.target.closest("button");
   if (!b) return;
-  peekImg.src = "img/" + b.dataset.img + ".webp";
+  if (b.dataset.ytId) setYtThumb(peekImg, b.dataset.ytId);
+  else {
+    peekImg.onload = null;
+    peekImg.onerror = null;
+    peekImg.removeAttribute("data-yt-thumb");
+    peekImg.src = "img/" + b.dataset.img + ".webp";
+  }
   peek.classList.add("on");
 });
 idx.addEventListener("pointerleave", () => {
@@ -296,9 +351,33 @@ function renderCase(raw) {
     if (l === "Start a brief") return tr("navBrief");
     return l;
   };
+  const yt = primaryYt(raw);
+  const ytLinks = (raw.links || []).filter(([, u]) => ytId(u));
+  const heroImg = yt
+    ? `<img src="${ytThumbUrl(yt)}" data-yt-thumb="${yt}" alt="${p.t}">`
+    : `<img src="img/${p.img}.webp" alt="${p.t}">`;
+  const gallery =
+    ytLinks.length > 1
+      ? `<div class="case-gallery yt-thumbs">${ytLinks
+          .map(([l, u]) => {
+            const id = ytId(u);
+            const label = linkLabel(l);
+            return `<button type="button" class="case-yt-thumb" data-yt="${id}" data-title="${p.t}: ${label}" aria-label="${label}">
+              <img src="${ytThumbUrl(id)}" data-yt-thumb="${id}" alt="${label}" loading="lazy">
+              <span class="play-badge" aria-hidden="true"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span>
+            </button>`;
+          })
+          .join("")}</div>`
+      : p.gal
+        ? `<div class="case-gallery">${p.gal.map((g) => `<img src="img/${g}.webp" alt="${p.t}" loading="lazy">`).join("")}</div>`
+        : "";
   caseEl.innerHTML = `
   <div class="case-bar"><div class="wrap"><span class="mono dim">${String(i + 1).padStart(2, "0")} / ${String(P.length).padStart(2, "0")} · ${p.c}</span><button class="btn" id="caseClose">${tr("caseClose")}</button></div></div>
-  <div class="case-hero ${p.wide ? "" : "portrait"}"><img src="img/${p.img}.webp" alt="${p.t}"></div>
+  <div class="case-hero ${p.wide && !yt ? "portrait" : ""} ${yt ? "has-yt" : ""}">${
+    yt
+      ? `<button type="button" class="case-hero-play" data-yt="${yt}" data-title="${p.t}" aria-label="${tr("watchHere")}">${heroImg}<span class="play-badge" aria-hidden="true"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span></button>`
+      : heroImg
+  }</div>
   <div class="wrap">
     <div class="case-body">
       <div><p class="mono dim">${p.c}</p><h2 id="case-title">${p.t}</h2><div class="story">${story.map((s) => `<p>${s}</p>`).join("")}</div></div>
@@ -320,16 +399,17 @@ function renderCase(raw) {
                   if (String(u).startsWith("#")) {
                     return `<a class="btn ${k ? "" : "solid"}" href="${u}" data-close-case>${label}</a>`;
                   }
-                  return `<a class="btn ${k ? "" : "solid"}" href="${u}">${label}</a>`;
+                  return `<a class="btn ${k ? "" : "solid"}" href="${u}" rel="noopener">${label}</a>`;
                 })
                 .join("")}</div>`
             : ""
         }
       </aside>
     </div>
-    ${p.gal ? `<div class="case-gallery">${p.gal.map((g) => `<img src="img/${g}.webp" alt="${p.t}" loading="lazy">`).join("")}</div>` : ""}
+    ${gallery}
   </div>
   <div class="case-next"><div class="wrap"><button data-next="${n.id}"><span class="mono dim">${tr("caseNext")}</span><span class="t">${n.t} →</span></button></div></div>`;
+  bindYtThumbs(caseEl);
   caseEl.querySelector("#caseClose").onclick = closeCase;
   caseEl.querySelector("[data-next]").onclick = () => {
     location.hash = n.id;
@@ -943,4 +1023,5 @@ document.addEventListener("am:lang", () => {
   }
 })();
 
+bindYtThumbs();
 initReel();
