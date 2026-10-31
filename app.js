@@ -1,6 +1,50 @@
-/* Ahmed Mokrane — scroll-driven camera reel + site chrome */
+/* Ahmed Mokrane: scroll-driven camera reel + site chrome */
 document.documentElement.classList.add("js");
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- on-site video player (YouTube embed stays on page) ---------- */
+function ytId(url) {
+  if (!url) return null;
+  const m = String(url).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([A-Za-z0-9_-]{6,})/);
+  return m ? m[1] : null;
+}
+
+const player = document.getElementById("player");
+const playerFrame = document.getElementById("playerFrame");
+const playerTitle = document.getElementById("player-title");
+let playerReturnFocus = null;
+
+function openPlayer(id, title) {
+  if (!id || !player) return;
+  playerReturnFocus = document.activeElement;
+  playerTitle.textContent = title || "Watch";
+  const origin = encodeURIComponent(location.origin);
+  playerFrame.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${origin}" title="${(title || "Video").replace(/"/g, "")}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  player.hidden = false;
+  document.body.style.overflow = "hidden";
+  document.getElementById("playerClose").focus();
+}
+
+function closePlayer() {
+  if (!player || player.hidden) return;
+  player.hidden = true;
+  playerFrame.innerHTML = "";
+  const caseOpen = document.getElementById("case");
+  if (!caseOpen || caseOpen.hidden) document.body.style.overflow = "";
+  if (playerReturnFocus && playerReturnFocus.focus) playerReturnFocus.focus();
+}
+
+document.getElementById("playerClose").onclick = closePlayer;
+player.addEventListener("click", (e) => {
+  if (e.target === player) closePlayer();
+});
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-yt]");
+  if (!btn) return;
+  e.preventDefault();
+  openPlayer(btn.dataset.yt, btn.dataset.title || btn.textContent.trim());
+});
 
 /* ---------- projects (preserved from V1) ---------- */
 const P = [
@@ -38,7 +82,7 @@ const P = [
     ],
     links: [
       ["Watch the film", "https://youtu.be/BeT4udZhZUc"],
-      ["Watch the teaser", "https://www.instagram.com/reel/DMGZdxaMNUX/"],
+      ["Watch the teaser", "https://youtu.be/czXuh4hBuzg"],
     ],
   },
   {
@@ -84,7 +128,7 @@ const P = [
       "Two Soolking performances at L’Olympia de Montréal, plus festival work at RaÏFest. The goal is never just to film the artist, but the energy running between the stage and the room.",
       "Artists, audience, backstage, reactions and the spontaneous moments in between, cut into a story that makes you feel you were there.",
     ],
-    links: [["Follow on Instagram", "https://www.instagram.com/ahmed.inspires/"]],
+    links: [["Start a brief", "#contact"]],
   },
   {
     id: "amine-radi",
@@ -99,7 +143,7 @@ const P = [
       "Amine Radi’s 2026 Montréal tour: capturing a comedian’s energy, personality and timing across multiple shows.",
       "Live comedy demands fast decisions and an ear for rhythm, so the cut keeps the spontaneity that makes the room laugh.",
     ],
-    links: [["Follow on Instagram", "https://www.instagram.com/ahmed.inspires/"]],
+    links: [["Start a brief", "#contact"]],
   },
   {
     id: "paul-mirabel",
@@ -113,7 +157,7 @@ const P = [
       "Arena stand-up: catching one performer’s personality while keeping the energy of thousands of people living the same moment.",
       "Further live comedy work includes Meriem Benoua (Montréal, 2026) and Camille Lorente (Montréal, 2025).",
     ],
-    links: [["Follow on Instagram", "https://www.instagram.com/ahmed.inspires/"]],
+    links: [["Start a brief", "#contact"]],
   },
   {
     id: "dominican-republic",
@@ -127,7 +171,7 @@ const P = [
       "A documentary-driven take on travel film. Instead of postcards, the focus is people, places, culture and the emotions found along the way.",
       "Telling a place through the people who live there.",
     ],
-    links: [["Follow on Instagram", "https://www.instagram.com/ahmed.inspires/"]],
+    links: [["Start a brief", "#contact"]],
   },
   {
     id: "directing",
@@ -235,7 +279,16 @@ function renderCase(p) {
         ${
           p.links.length
             ? `<div class="ctas">${p.links
-                .map(([l, u], k) => `<a class="btn ${k ? "" : "solid"}" href="${u}" target="_blank" rel="noopener">${l}<span>↗</span></a>`)
+                .map(([l, u], k) => {
+                  const id = ytId(u);
+                  if (id) {
+                    return `<button type="button" class="btn ${k ? "" : "solid"}" data-yt="${id}" data-title="${p.t}: ${l}">${l}</button>`;
+                  }
+                  if (String(u).startsWith("#")) {
+                    return `<a class="btn ${k ? "" : "solid"}" href="${u}" data-close-case>${l}</a>`;
+                  }
+                  return `<a class="btn ${k ? "" : "solid"}" href="${u}">${l}</a>`;
+                })
                 .join("")}</div>`
             : ""
         }
@@ -248,6 +301,13 @@ function renderCase(p) {
   caseEl.querySelector("[data-next]").onclick = () => {
     location.hash = n.id;
   };
+  caseEl.querySelectorAll("[data-close-case]").forEach((a) =>
+    a.addEventListener("click", () => {
+      history.pushState("", "", location.pathname + location.search);
+      caseEl.hidden = true;
+      document.body.style.overflow = "";
+    })
+  );
 }
 function openFromHash() {
   const p = P.find((x) => x.id === location.hash.slice(1));
@@ -273,7 +333,8 @@ addEventListener("hashchange", openFromHash);
 openFromHash();
 addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
-    if (!caseEl.hidden) closeCase();
+    if (!player.hidden) closePlayer();
+    else if (!caseEl.hidden) closeCase();
     else if (!sheet.hidden) closeSheet();
   }
   if (e.key === "Tab" && !caseEl.hidden) {
@@ -468,7 +529,7 @@ if (!reduce && "IntersectionObserver" in window) {
   });
 }
 
-/* ---------- REEL: scroll-driven camera UI ---------- */
+/* ---------- REEL: early pinned camera scrub (brand fades into viewfinder) ---------- */
 const TAKES = [
   {
     label: "Take 01 · Slate",
@@ -528,7 +589,7 @@ const TAKES = [
   {
     label: "Take 06 · Cut",
     title: "Scrub the timeline.",
-    sub: "NLE playhead · clips · waveform — then the work below.",
+    sub: "NLE playhead, clips, waveform: then the work below.",
     ratio: 1.78,
     read: "ISO 800 · T2.8 · 23.976",
     ar: "16:9",
@@ -548,6 +609,7 @@ function applyMattes(ratio) {
   if (!vf) return;
   const W = vf.clientWidth;
   const H = vf.clientHeight;
+  if (!W || !H) return;
   const own = W / H;
   let ih = H,
     iw = W;
@@ -591,6 +653,7 @@ function setBeat(i, progressWithin = 0) {
 
 function initReel() {
   const stage = document.getElementById("reel");
+  const pin = document.getElementById("reelPin");
   const hudTop = document.getElementById("hudTop");
   const hudBot = document.getElementById("hudBot");
   const takeLabel = document.getElementById("takeLabel");
@@ -598,11 +661,12 @@ function initReel() {
   const takeSub = document.getElementById("takeSub");
   const scopeRail = document.getElementById("scopeRail");
   const timelineStrip = document.getElementById("timelineStrip");
+  const beatRail = document.getElementById("beatRail");
+  const openBrand = document.getElementById("openBrand");
   const heroImg = document.getElementById("heroImg");
 
-  // Hero subtle Ken Burns (non-scroll)
   if (!reduce && heroImg && typeof gsap !== "undefined") {
-    gsap.to(heroImg, { scale: 1.12, duration: 18, ease: "none", yoyo: true, repeat: -1 });
+    gsap.to(heroImg, { scale: 1.1, duration: 18, ease: "none", yoyo: true, repeat: -1 });
   }
 
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
@@ -613,74 +677,116 @@ function initReel() {
   gsap.registerPlugin(ScrollTrigger);
 
   if (reduce) {
-    // Show final-ish composed state without scrubbing
-    gsap.set([hudTop, hudBot, takeLabel, takeTitle, takeSub, scopeRail, timelineStrip], { opacity: 1, y: 0 });
+    gsap.set([hudTop, hudBot, takeLabel, takeTitle, takeSub, scopeRail, timelineStrip, beatRail], {
+      opacity: 1,
+      y: 0,
+    });
+    if (openBrand) gsap.set(openBrand, { opacity: 0, pointerEvents: "none" });
+    if (pin) pin.classList.add("is-framed");
     setBeat(0);
     applyMattes(2.39);
     return;
   }
 
-  // Initial hidden copy / HUD
   gsap.set([hudTop, hudBot], { opacity: 0, y: 8 });
   gsap.set([takeLabel, takeTitle, takeSub], { opacity: 0, y: 16 });
-  gsap.set([scopeRail, timelineStrip], { opacity: 0 });
+  gsap.set([scopeRail, timelineStrip, beatRail], { opacity: 0 });
   setBeat(0);
-  applyMattes(2.8); // start more open, then squeeze
+  applyMattes(2.6);
 
   let lastBeat = -1;
+  let framed = false;
 
   ScrollTrigger.create({
     trigger: stage,
     start: "top top",
     end: "bottom bottom",
-    scrub: 0.65,
+    scrub: 0.55,
     onUpdate: (self) => {
-      const p = self.progress; // 0 → 1 across 6 beats
+      const p = self.progress;
+
+      // First ~10%: brand holds, then dissolves into camera UI
+      const brandOut = Math.min(1, Math.max(0, (p - 0.02) / 0.08));
+      if (openBrand) {
+        gsap.set(openBrand, {
+          opacity: 1 - brandOut,
+          y: brandOut * -28,
+          pointerEvents: brandOut > 0.55 ? "none" : "auto",
+        });
+      }
+
+      const wantFrame = brandOut > 0.35;
+      if (wantFrame !== framed && pin) {
+        framed = wantFrame;
+        pin.classList.toggle("is-framed", framed);
+        // Recalc mattes after layout shift
+        requestAnimationFrame(() => applyMattes(TAKES[Math.max(0, lastBeat)].ratio));
+      }
+
+      // Camera scrub occupies the remaining progress after brand exit
+      const scrubP = Math.min(1, Math.max(0, (p - 0.08) / 0.92));
       const beats = TAKES.length;
-      const raw = p * beats;
+      const raw = scrubP * beats;
       const i = Math.min(beats - 1, Math.floor(raw));
       const local = raw - i;
 
-      // Intro chrome (first ~12% of stage): reveal HUD + copy
-      const intro = Math.min(1, p / 0.08);
-      gsap.set(hudTop, { opacity: intro, y: 8 * (1 - intro) });
-      gsap.set(hudBot, { opacity: intro, y: 8 * (1 - intro) });
-      gsap.set(takeLabel, { opacity: intro, y: 10 * (1 - intro) });
-      gsap.set(takeTitle, { opacity: intro, y: 16 * (1 - intro) });
-      gsap.set(takeSub, { opacity: intro * 0.95, y: 12 * (1 - intro) });
+      const intro = Math.min(1, scrubP / 0.1);
+      gsap.set(hudTop, { opacity: intro * brandOut, y: 8 * (1 - intro) });
+      gsap.set(hudBot, { opacity: intro * brandOut, y: 8 * (1 - intro) });
+      gsap.set(takeLabel, { opacity: intro * brandOut, y: 10 * (1 - intro) });
+      gsap.set(takeTitle, { opacity: intro * brandOut, y: 16 * (1 - intro) });
+      gsap.set(takeSub, { opacity: intro * 0.95 * brandOut, y: 12 * (1 - intro) });
+      gsap.set(beatRail, { opacity: intro * brandOut });
 
-      // Scopes + timeline fade in mid-reel
-      const scopesOn = Math.min(1, Math.max(0, (p - 0.12) / 0.1));
+      const scopesOn = Math.min(1, Math.max(0, (scrubP - 0.12) / 0.1)) * brandOut;
       gsap.set(scopeRail, { opacity: scopesOn });
-      const tlOn = Math.min(1, Math.max(0, (p - 0.2) / 0.12));
+      const tlOn = Math.min(1, Math.max(0, (scrubP - 0.18) / 0.12)) * brandOut;
       gsap.set(timelineStrip, { opacity: tlOn });
 
-      if (i !== lastBeat) {
-        lastBeat = i;
-        // Soft crossfade handled by class swap
-      }
+      lastBeat = i;
       setBeat(i, local);
 
-      // Continuous matte squeeze between beats for filmic feel
       const a = TAKES[i];
       const b = TAKES[Math.min(beats - 1, i + 1)];
       const ratio = a.ratio + (b.ratio - a.ratio) * local;
       applyMattes(ratio);
 
-      // Media scale push within beat
       const active = document.querySelector("#vfMedia img.is-active");
       if (active) {
-        const sc = 1.04 + local * 0.06;
+        const sc = 1.03 + local * 0.05;
         active.style.transform = `scale(${sc})`;
       }
     },
   });
 
-  // Keep mattes correct on resize
   addEventListener("resize", () => {
     const i = Math.max(0, lastBeat);
     applyMattes(TAKES[i].ratio);
   });
 }
+
+/* ---------- offer CTAs preselect project type ---------- */
+function selectProjectType(label) {
+  const chips = document.querySelectorAll(".types .chip");
+  let matched = false;
+  chips.forEach((x) => {
+    const on = x.dataset.t === label;
+    x.setAttribute("aria-pressed", on ? "true" : "false");
+    if (on) {
+      matched = true;
+      ptype = label;
+    }
+  });
+  if (!matched && chips[0]) {
+    chips.forEach((x, i) => x.setAttribute("aria-pressed", i === 0 ? "true" : "false"));
+    ptype = chips[0].dataset.t;
+  }
+}
+
+document.querySelectorAll("[data-offer]").forEach((a) =>
+  a.addEventListener("click", () => {
+    selectProjectType(a.dataset.offer);
+  })
+);
 
 initReel();

@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Ahmed Mokrane</title>
-  <meta name="description" content="Ahmed Mokrane — Director & Cinematographer, Montréal. Short films, music videos, concerts and live comedy.">
+  <meta name="description" content="Ahmed Mokrane: Director and Cinematographer, Montréal. Short films, music videos, concerts and live comedy.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,12 +19,11 @@
     <nav class="nav" aria-label="Primary">
       <a href="#reel">Reel</a>
       <a href="#work">Work</a>
-      <a href="#films">Films</a>
-      <a href="#live">Live</a>
+      <a href="#offer">Offer</a>
       <a href="#approach">Approach</a>
       <a href="#about">About</a>
     </nav>
-    <a class="btn solid book" href="#contact">Book a call</a>
+    <a class="btn solid book" href="#contact">Start a brief</a>
     <button class="btn menu-btn" id="menuOpen" aria-expanded="false" aria-controls="sheet">Menu</button>
   </div>
 </header>
@@ -35,48 +34,22 @@
     <a href="#reel">Reel</a>
     <a href="#work">Work</a>
     <a href="#films">Films</a>
-    <a href="#live">Live</a>
+    <a href="#offer">Offer</a>
     <a href="#approach">Approach</a>
     <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#contact">Start a brief</a>
   </nav>
   <p class="mono dim" style="margin-top:auto">Montréal, Québec · @ahmed.inspires</p>
 </div>
 
 <main id="top">
 
-  <!-- HERO: brand-first, full-bleed, one composition -->
-  <section class="hero" aria-labelledby="h-brand">
-    <div class="hero-bg" aria-hidden="true">
-      <img src="img/portrait.webp" alt="" id="heroImg">
-    </div>
-    <div class="hero-veil" aria-hidden="true"></div>
-    <div class="hero-letterbox t" aria-hidden="true"></div>
-    <div class="hero-letterbox b" aria-hidden="true"></div>
-    <div class="hero-content">
-      <div class="wrap">
-        <p class="mono hero-role">Director &amp; Cinematographer · Montréal</p>
-        <h1 class="hero-brand" id="h-brand">Ahmed Mokrane<i>.</i></h1>
-        <h2>Where every frame holds a <em>soul</em>.</h2>
-        <p class="lede">Short films, music videos, concerts and live comedy — made by a filmmaker who started with a camera at age three.</p>
-        <div class="ctas">
-          <a class="btn solid" href="https://youtu.be/czXuh4hBuzg" target="_blank" rel="noopener"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 0l9 5-9 5z"/></svg>Watch the teaser</a>
-          <a class="btn" href="#reel">Scrub the reel</a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-scroll-cue" aria-hidden="true">
-      <span class="mono">Scroll to advance</span>
-      <span class="bar"></span>
-    </div>
-  </section>
-
-  <!-- REEL: pinned scroll-through camera UI -->
-  <section class="reel-stage" id="reel" aria-label="Camera reel scroll experience">
-    <div class="reel-pin" id="reelPin">
-      <div class="viewfinder" id="viewfinder" role="img" aria-label="Scroll-driven camera viewfinder">
+  <!-- OPEN: brand-first full-bleed that becomes the pinned camera reel on first scroll -->
+  <section class="open-stage" id="reel" aria-label="Opening camera reel">
+    <div class="open-pin" id="reelPin">
+      <div class="viewfinder is-bleed" id="viewfinder" role="img" aria-label="Scroll-driven camera viewfinder">
         <div class="vf-media" id="vfMedia">
-          <img src="img/portrait.webp" alt="" data-beat="0" class="is-active">
+          <img src="img/portrait.webp" alt="" data-beat="0" class="is-active" id="heroImg">
           <img src="img/concerts.webp" alt="" data-beat="1">
           <img src="img/edm.webp" alt="" data-beat="2">
           <img src="img/sonrie.webp" alt="" data-beat="3">
@@ -94,10 +67,30 @@
           <div class="row t" id="hudTop"><span class="rec-ind">REC</span><span id="tc">TC 00:00:00:00</span></div>
           <div class="row b" id="hudBot"><span id="camRead">ISO 800 · T2.8 · 23.976</span><span id="arRead">2.39:1</span></div>
         </div>
-        <div class="vf-copy">
+        <div class="vf-copy" id="vfCopy">
           <p class="vf-take-label" id="takeLabel">Take 01 · Slate</p>
           <p class="vf-title" id="takeTitle">Mark the frame.</p>
-          <p class="vf-sub" id="takeSub">Scroll advances the camera UI — not just the page.</p>
+          <p class="vf-sub" id="takeSub">Scroll advances the camera UI, not just the page.</p>
+        </div>
+      </div>
+
+      <div class="open-brand" id="openBrand">
+        <div class="open-veil" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="wrap">
+            <p class="mono hero-role">Director &amp; Cinematographer · Montréal</p>
+            <h1 class="hero-brand" id="h-brand">Ahmed Mokrane<i>.</i></h1>
+            <h2>Where every frame holds a <em>soul</em>.</h2>
+            <p class="lede">Short films, music videos, concerts and live comedy, made by a filmmaker who started with a camera at age three.</p>
+            <div class="ctas">
+              <a class="btn solid" href="#contact">Start a brief</a>
+              <button type="button" class="btn" data-yt="czXuh4hBuzg" data-title="Ahmed Mokrane teaser"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M1 0l9 5-9 5z"/></svg>Watch the teaser</button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-scroll-cue" aria-hidden="true">
+          <span class="mono">Scroll to scrub</span>
+          <span class="bar"></span>
         </div>
       </div>
 
@@ -133,11 +126,12 @@
     </div>
   </div>
 
-  <!-- WORK INDEX -->
+  <!-- WORK INDEX: proof -->
   <section id="work" aria-labelledby="h-work">
     <div class="wrap">
       <div class="head">
         <div>
+          <p class="mono dim kicker-top">Proof</p>
           <h2 id="h-work">Selected <em>work</em></h2>
           <p>Fiction, music videos, concerts, live comedy and documentary. Open any title for the story, the role and the footage.</p>
         </div>
@@ -189,8 +183,8 @@
             </div>
             <dl class="facts"><div><dt>Role</dt><dd>Writer, Director</dd></div><div><dt>Shot in</dt><dd>Montréal</dd></div></dl>
             <div class="ctas">
-              <a class="btn solid" href="https://youtu.be/lpXYwm2c-lg" target="_blank" rel="noopener"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg>Watch the film</a>
-              <a class="btn" href="https://youtu.be/czXuh4hBuzg" target="_blank" rel="noopener">Teaser</a>
+              <button type="button" class="btn solid" data-yt="lpXYwm2c-lg" data-title="Entre Deux Mondes"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg>Watch the film</button>
+              <button type="button" class="btn" data-yt="czXuh4hBuzg" data-title="Entre Deux Mondes teaser">Teaser</button>
             </div>
           </div>
         </div>
@@ -220,8 +214,8 @@
             </div>
             <dl class="facts"><div><dt>Role</dt><dd>Director</dd></div><div><dt>Shot in</dt><dd>Dominican Republic</dd></div></dl>
             <div class="ctas">
-              <a class="btn solid" href="https://youtu.be/BeT4udZhZUc" target="_blank" rel="noopener"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg>Watch the film</a>
-              <a class="btn" href="https://www.instagram.com/reel/DMGZdxaMNUX/" target="_blank" rel="noopener">Teaser</a>
+              <button type="button" class="btn solid" data-yt="BeT4udZhZUc" data-title="Sonrié"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg>Watch the film</button>
+              <button type="button" class="btn" data-yt="czXuh4hBuzg" data-title="Ahmed Mokrane teaser">Teaser</button>
             </div>
           </div>
         </div>
@@ -244,13 +238,13 @@
         <table class="callsheet">
           <thead><tr><th>Artist / Event</th><th>Venue</th><th>Format</th><th>Role</th><th>Year</th></tr></thead>
           <tbody>
-            <tr><td>Soolking</td><td>L'Olympia de Montréal · two shows</td><td>Concert</td><td>Director, audiovisual production</td><td class="yr">—</td></tr>
-            <tr><td>RaÏFest</td><td>Montréal</td><td>Festival</td><td>Director / Filmmaker</td><td class="yr">—</td></tr>
+            <tr><td>Soolking</td><td>L'Olympia de Montréal · two shows</td><td>Concert</td><td>Director, audiovisual production</td><td class="yr">TBA</td></tr>
+            <tr><td>RaÏFest</td><td>Montréal</td><td>Festival</td><td>Director / Filmmaker</td><td class="yr">TBA</td></tr>
             <tr><td>Amine Radi</td><td>Montréal tour</td><td>Live comedy</td><td>Director / Filmmaker</td><td class="yr">2026</td></tr>
-            <tr><td>Paul Mirabel</td><td>Place Bell, Laval · Centre Vidéotron, Québec</td><td>Stand-up, arena</td><td>Filmmaker</td><td class="yr">—</td></tr>
+            <tr><td>Paul Mirabel</td><td>Place Bell, Laval · Centre Vidéotron, Québec</td><td>Stand-up, arena</td><td>Filmmaker</td><td class="yr">TBA</td></tr>
             <tr><td>Meriem Benoua</td><td>Montréal</td><td>Live comedy</td><td>Filmmaker</td><td class="yr">2026</td></tr>
             <tr><td>Camille Lorente</td><td>Montréal</td><td>Live comedy</td><td>Filmmaker</td><td class="yr">2025</td></tr>
-            <tr><td>Concert series</td><td>Salle Désilets</td><td>Concert</td><td>Director / Filmmaker</td><td class="yr">—</td></tr>
+            <tr><td>Concert series</td><td>Salle Désilets</td><td>Concert</td><td>Director / Filmmaker</td><td class="yr">TBA</td></tr>
           </tbody>
         </table>
       </div>
@@ -270,19 +264,79 @@
         <div>
           <div class="stat"><b>1M+</b><span class="mono dim">views across music video projects</span></div>
           <ul class="tracks">
-            <li><a href="https://youtu.be/vD9WzlaM1D0" target="_blank" rel="noopener"><span class="play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span><div><h4>Ssver n Tmara<small>Yacine Yafsah · Official music video</small></h4><p>Full creative direction and production, from concept to final cut.</p></div><span class="mono dim">YouTube</span></a></li>
-            <li><a href="https://youtu.be/fb_vwNqY9y0" target="_blank" rel="noopener"><span class="play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span><div><h4>Tuzma<small>Said Saidj · Official music video</small></h4><p>Full creative direction and production, from concept to final cut.</p></div><span class="mono dim">YouTube</span></a></li>
-            <li><a href="https://youtu.be/Z76Tm12dh_s" target="_blank" rel="noopener"><span class="play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span><div><h4>Ik Kudi Hundi Si<small>Inder Khedewala · First official music video</small></h4><p>The project that started his work directing official music videos.</p></div><span class="mono dim">YouTube</span></a></li>
+            <li><button type="button" data-yt="vD9WzlaM1D0" data-title="Ssver n Tmara"><span class="play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span><div><h4>Ssver n Tmara<small>Yacine Yafsah · Official music video</small></h4><p>Full creative direction and production, from concept to final cut.</p></div><span class="mono dim">Play here</span></button></li>
+            <li><button type="button" data-yt="fb_vwNqY9y0" data-title="Tuzma"><span class="play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span><div><h4>Tuzma<small>Said Saidj · Official music video</small></h4><p>Full creative direction and production, from concept to final cut.</p></div><span class="mono dim">Play here</span></button></li>
+            <li><button type="button" data-yt="Z76Tm12dh_s" data-title="Ik Kudi Hundi Si"><span class="play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l9 5-9 5z"/></svg></span><div><h4>Ik Kudi Hundi Si<small>Inder Khedewala · First official music video</small></h4><p>The project that started his work directing official music videos.</p></div><span class="mono dim">Play here</span></button></li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Mid-funnel lead beat -->
+  <aside class="lead-band" aria-label="Next step">
+    <div class="wrap">
+      <div>
+        <p class="mono dim">Next step</p>
+        <h2>Have a date, a song, or a <em>stage</em>?</h2>
+        <p>Send a short brief. Ahmed replies with availability and a clear next step.</p>
+      </div>
+      <a class="btn solid" href="#contact">Start a brief<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+    </div>
+  </aside>
+
+  <!-- OFFER: commercial path -->
+  <section id="offer" aria-labelledby="h-offer">
+    <div class="wrap">
+      <div class="slate"><span>Sc. <b>07</b></span><span>Offer</span><span class="k">Now booking</span></div>
+      <div class="head">
+        <div>
+          <h2 id="h-offer">Four ways to <em>work</em> together</h2>
+          <p>Clear formats, one filmmaker. Choose the path that fits, then send a brief from the contact form.</p>
+        </div>
+      </div>
+      <ol class="offers">
+        <li>
+          <span class="no">01</span>
+          <div>
+            <h3>Short films</h3>
+            <p>Narrative direction from treatment through picture lock. Fiction with intention in every frame.</p>
+          </div>
+          <a class="offer-cta" href="#contact" data-offer="Short film">Brief this<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+        </li>
+        <li>
+          <span class="no">02</span>
+          <div>
+            <h3>Music videos</h3>
+            <p>Concept, shoot and cut that give a song its own visual world. Full creative direction, A to Z.</p>
+          </div>
+          <a class="offer-cta" href="#contact" data-offer="Music video">Brief this<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+        </li>
+        <li>
+          <span class="no">03</span>
+          <div>
+            <h3>Concerts &amp; live</h3>
+            <p>Multi-cam coverage that captures the stage, the room and the moments between. Arenas to intimate rooms.</p>
+          </div>
+          <a class="offer-cta" href="#contact" data-offer="Concert / live">Brief this<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+        </li>
+        <li>
+          <span class="no">04</span>
+          <div>
+            <h3>Brand &amp; commercial</h3>
+            <p>Campaign films and brand stories with the same cinematic care as narrative work. Clarity without losing soul.</p>
+          </div>
+          <a class="offer-cta" href="#contact" data-offer="Brand content">Brief this<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+        </li>
+      </ol>
+      <p class="offer-note mono dim">Prefer to talk first? Email <a href="mailto:ahmedmkrne@gmail.com">ahmedmkrne@gmail.com</a> or call <a href="tel:+15145698970">+1 (514) 569-8970</a>.</p>
+    </div>
+  </section>
+
   <!-- APPROACH -->
   <section id="approach" aria-labelledby="h-app">
     <div class="wrap">
-      <div class="slate"><span>Sc. <b>06</b></span><span>Philosophy</span></div>
+      <div class="slate"><span>Sc. <b>08</b></span><span>Philosophy</span></div>
       <div class="head"><div><h2 id="h-app">The camera is a <em>language</em>.</h2><p>No two projects should look the same. Every story, artist and brief gets its own visual grammar.</p></div></div>
       <div class="grammar">
         <div><span class="w">Light</span><span class="arrow">creates</span><span class="to">emotion</span></div>
@@ -361,9 +415,14 @@
     <div class="wrap">
       <div class="slate"><span>Sc. <b>10</b></span><span>Final frame</span><span class="k">Now booking</span></div>
       <h2 id="h-contact" style="margin-top:var(--s-5)">Let's make something people <em>feel</em>.</h2>
+      <p class="contact-lead">Tell Ahmed what should land with the audience. A short brief opens the conversation; email and phone stay available if you prefer to reach out directly.</p>
       <div class="contact-grid">
         <div>
-          <p class="dim" style="max-width:40ch;margin-bottom:var(--s-4)">Commercial work, film commissions, music videos and live productions. Reach out directly, or write a brief and send it from your own inbox.</p>
+          <div class="value-props">
+            <div><span class="mono dim">01</span><p>One filmmaker from concept through grade</p></div>
+            <div><span class="mono dim">02</span><p>Clear reply with availability and next steps</p></div>
+            <div><span class="mono dim">03</span><p>Based in Montréal, open to travel</p></div>
+          </div>
           <div class="lines">
             <div class="line"><div><span class="mono dim">Email</span><div class="v" id="email">ahmedmkrne@gmail.com</div></div><button class="copy" data-copy="ahmedmkrne@gmail.com">Copy</button></div>
             <div class="line"><div><span class="mono dim">Phone</span><div class="v">+1 (514) 569-8970</div></div><button class="copy" data-copy="+15145698970">Copy</button></div>
@@ -410,6 +469,18 @@
 </footer>
 
 <div class="case" id="case" hidden role="dialog" aria-modal="true" aria-labelledby="case-title"></div>
+
+<div class="player" id="player" hidden role="dialog" aria-modal="true" aria-labelledby="player-title">
+  <div class="player-shell">
+    <div class="player-bar">
+      <span class="t" id="player-title">Watch</span>
+      <button class="btn" type="button" id="playerClose">Close</button>
+    </div>
+    <div class="player-frame" id="playerFrame"></div>
+    <p class="mono player-hint">Playing on this page. Press Esc to close.</p>
+  </div>
+</div>
+
 <div class="toast" id="toast" hidden></div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
