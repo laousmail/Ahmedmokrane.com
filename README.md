@@ -4,18 +4,17 @@ Static site for Ahmed Mokrane: Director and Cinematographer (Montréal).
 
 ## What's here
 
-Camera-scroll redesign with an early brand-to-viewfinder scrub, on-site video player, offer funnel, work index, films, live call sheet, approach, about, kit, and contact brief.
+Premium filmmaker brand experience: cinematic opening reel, editorial portfolio, signature films, live productions, music videos, four disciplines, approach manifesto, about chapters, camera report, Azar Films, and an on-site brief form. Portfolio video plays in a page lightbox.
 
 ## Files
 
-- `index.html`: structure
-- `styles.css`: design system and layout
-- `app.js`: reel ScrollTrigger, work index, case overlay, on-site player, brief form
-- `img/`: project stills and portraits
+- `index.html`: structure, SEO meta, structured data
+- `styles.css`: design tokens and layout
+- `app.js`: reel ScrollTrigger, portfolio, case overlay, player, brief form
+- `img/`: stills and portraits
+- `robots.txt`, `sitemap.xml`: crawl hints
 
 ## Local preview
-
-No build step. From the repo root:
 
 ```bash
 python3 -m http.server 8765
@@ -25,4 +24,4 @@ Open `http://localhost:8765`. Fonts and GSAP load from CDN.
 
 ## Hosting
 
-Serve the repo root as a static site (e.g. GitHub Pages: Deploy from branch, `/` root). Relative asset paths; no `CNAME` or Actions workflows in this repo yet.
+Serve the repo root as a static site (for example GitHub Pages from `/`). Relative asset paths.
