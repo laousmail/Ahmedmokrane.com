@@ -533,36 +533,6 @@ function tick() {
 tick();
 if (reduce) setInterval(tick, 1000);
 
-/* ---------- grain ---------- */
-(function () {
-  const c = document.getElementById("grain");
-  const x = c.getContext("2d");
-  const S = 160;
-  c.width = S;
-  c.height = S;
-  const img = x.createImageData(S, S);
-  function draw() {
-    for (let i = 0; i < img.data.length; i += 4) {
-      const v = (Math.random() * 255) | 0;
-      img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
-      img.data[i + 3] = 255;
-    }
-    x.putImageData(img, 0, 0);
-  }
-  draw();
-  c.style.imageRendering = "pixelated";
-  if (!reduce) {
-    let last = 0;
-    (function g(t) {
-      if (t - last > 83) {
-        draw();
-        last = t;
-      }
-      requestAnimationFrame(g);
-    })(0);
-  }
-})();
-
 /* ---------- copy + toast ---------- */
 const toast = document.getElementById("toast");
 let tt;

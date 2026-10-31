@@ -61,6 +61,25 @@ body {
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.7),
+    0 3px 14px rgba(0, 0, 0, 0.45);
+}
+
+h1,
+h2,
+h3,
+h4,
+.mark,
+.hero-brand,
+.hero-line,
+.sig-hero-copy h3,
+.live-feature-copy h3,
+.proof-lines li,
+.folio .meta .t {
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.75),
+    0 6px 24px rgba(0, 0, 0, 0.5);
 }
 
 img {
@@ -121,17 +140,6 @@ em {
 
 .dim {
   color: var(--dim);
-}
-
-#grain {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 80;
-  opacity: 0.04;
-  mix-blend-mode: overlay;
 }
 
 /* header */
