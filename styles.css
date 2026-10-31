@@ -238,16 +238,102 @@ em {
   margin-left: auto;
 }
 
+.chrome-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-left: 0.35rem;
+}
+
+.sound-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--dim);
+  cursor: pointer;
+}
+
+.sound-btn svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.sound-btn .ic-off {
+  display: none;
+}
+
+.sound-btn.is-muted .ic-on {
+  display: none;
+}
+
+.sound-btn.is-muted .ic-off {
+  display: block;
+}
+
+.sound-btn:hover,
+.sound-btn[aria-pressed="true"] {
+  color: var(--bone);
+}
+
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.lang-btn {
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 0;
+  padding: 0.35em 0.15em;
+  cursor: pointer;
+}
+
+.lang-btn[aria-pressed="true"] {
+  color: var(--bone);
+}
+
+.lang-btn:hover {
+  color: var(--bone);
+}
+
+.lang-sep {
+  color: var(--faint);
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+}
+
+.sheet-tools {
+  margin: 1.25rem 0 0.35rem;
+  margin-left: 0;
+}
+
+.sheet-lang {
+  margin: 0;
+}
+
 @media (max-width: 920px) {
   .nav {
     display: none;
   }
   .top .wrap {
-    gap: 0.55rem;
+    gap: 0.45rem;
+  }
+  .chrome-tools {
+    margin-left: auto;
   }
   .top .book {
     display: inline-flex;
-    margin-left: auto;
+    margin-left: 0;
     padding: 0.7em 0.95em;
     font-size: 0.65rem;
   }
@@ -355,8 +441,8 @@ em {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(10, 11, 14, 0.45) 0%, transparent 32%, rgba(10, 11, 14, 0.45) 55%, rgba(10, 11, 14, 0.96) 100%),
-    radial-gradient(ellipse 70% 50% at 65% 30%, rgba(196, 138, 82, 0.1), transparent 55%);
+    linear-gradient(180deg, rgba(10, 11, 14, 0.08) 0%, transparent 32%, rgba(10, 11, 14, 0.28) 58%, rgba(10, 11, 14, 0.96) 100%),
+    radial-gradient(ellipse 70% 50% at 50% 26%, rgba(196, 138, 82, 0.05), transparent 55%);
   pointer-events: none;
 }
 
@@ -464,7 +550,7 @@ em {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 28%;
+  object-position: center 30%;
   opacity: 0;
   transform: scale(1.06);
   will-change: transform, opacity;
@@ -472,6 +558,21 @@ em {
 
 .vf-media img.is-active {
   opacity: 1;
+}
+
+/* Hero still: keep Ahmed's eyes as the first-viewport focal point */
+#heroImg {
+  object-position: center 24%;
+  transform: scale(1.04);
+}
+
+@media (max-width: 720px) {
+  #heroImg {
+    /* Keep eyes in the clear band above stacked hero copy */
+    object-position: center 10%;
+    transform: scale(1.12);
+    transform-origin: center 16%;
+  }
 }
 
 .vf-matte {
@@ -850,6 +951,51 @@ em {
   letter-spacing: -0.015em;
 }
 
+/* social proof */
+.proof {
+  padding-block: var(--s-6);
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse 60% 50% at 12% 20%, rgba(196, 138, 82, 0.07), transparent 55%),
+    var(--ink);
+}
+
+.proof h2 {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  max-width: 16ch;
+  margin-bottom: 0.85rem;
+}
+
+.proof-lede {
+  color: var(--dim);
+  max-width: 48ch;
+  margin-bottom: var(--s-5);
+}
+
+.proof-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.proof-lines li {
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--f-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--dim);
+}
+
+.proof-lines strong {
+  color: var(--bone);
+  font-weight: 500;
+}
+
 /* shared */
 .kicker-top {
   margin-bottom: 0.85rem;
@@ -953,6 +1099,13 @@ section {
   transition: transform 0.8s var(--ease);
 }
 
+.folio .thumb .play-badge {
+  width: 2.6rem;
+  height: 2.6rem;
+  opacity: 0.92;
+  pointer-events: none;
+}
+
 .folio button {
   display: block;
   width: 100%;
@@ -1052,7 +1205,20 @@ section {
   margin-bottom: var(--s-5);
 }
 
-.sig-hero img {
+.sig-play {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.sig-hero img,
+.sig-play img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1065,12 +1231,21 @@ section {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, transparent 35%, rgba(10, 11, 14, 0.92) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sig-hero .play-badge {
+  z-index: 2;
+  width: 3.6rem;
+  height: 3.6rem;
 }
 
 .sig-hero-copy {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding-bottom: clamp(2rem, 6vh, 3.5rem);
+  pointer-events: none;
 }
 
 .sig-hero-copy h3 {
@@ -1145,18 +1320,64 @@ section {
   gap: 0.65rem;
 }
 
+.films-sound {
+  margin-top: 1.15rem;
+  color: var(--dim);
+  font-size: 0.98rem;
+  max-width: 42ch;
+}
+
+.films-sound a,
+.facts a,
+.case-side a {
+  color: var(--bone);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(232, 226, 214, 0.35);
+}
+
+.films-sound a:hover,
+.facts a:hover,
+.case-side a:hover {
+  border-bottom-color: var(--copper);
+  color: var(--copper);
+}
+
+.sig-credit,
+.sig-fest {
+  margin-top: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+}
+
+.sig-fest {
+  color: var(--copper);
+}
+
 .laurel {
   display: flex;
   gap: 0.85rem;
-  align-items: center;
+  align-items: flex-start;
   margin: 1.25rem 0;
   color: var(--copper);
+}
+
+.laurel.is-featured {
+  margin: 1.75rem 0;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid rgba(196, 138, 82, 0.35);
+  background: linear-gradient(135deg, rgba(196, 138, 82, 0.08), transparent 70%);
 }
 
 .laurel svg {
   width: 28px;
   height: 42px;
   flex: none;
+}
+
+.laurel.is-featured svg {
+  width: 34px;
+  height: 52px;
 }
 
 .laurel small {
@@ -1169,10 +1390,30 @@ section {
 }
 
 .laurel strong {
+  display: block;
   font-family: var(--f-display);
   font-weight: 500;
   color: var(--bone);
-  font-size: 1.05rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  margin-top: 0.2rem;
+}
+
+.laurel-note {
+  margin: 0.45rem 0 0;
+  color: var(--dim);
+  font-size: 0.95rem;
+  max-width: 36ch;
+}
+
+.sig-stills figure {
+  margin: 0;
+}
+
+.sig-stills figcaption {
+  margin-top: 0.45rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 860px) {
@@ -1226,6 +1467,18 @@ section {
 
 .live-feature-copy p:last-child {
   color: var(--dim);
+}
+
+.worked {
+  color: var(--copper);
+  font-family: var(--f-display);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  letter-spacing: -0.01em;
+  margin: 0.15rem 0 0.55rem;
+}
+
+.live-card .worked {
+  margin-bottom: 0.35rem;
 }
 
 .live-grid {
@@ -2065,6 +2318,8 @@ footer .copy {
 .case-hero {
   max-height: 62vh;
   overflow: hidden;
+  position: relative;
+  background: var(--ink-2);
 }
 
 .case-hero.portrait {
@@ -2072,10 +2327,39 @@ footer .copy {
   margin-inline: auto;
 }
 
+.case-hero.has-yt {
+  max-width: min(1120px, 100%);
+  margin-inline: auto;
+  aspect-ratio: 16 / 9;
+  max-height: none;
+}
+
 .case-hero img {
   width: 100%;
   height: 62vh;
   object-fit: cover;
+  display: block;
+}
+
+.case-hero.has-yt img {
+  height: 100%;
+}
+
+.case-hero-play {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.case-hero-play .play-badge {
+  width: 3.4rem;
+  height: 3.4rem;
 }
 
 .case-body {
@@ -2107,6 +2391,30 @@ footer .copy {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+.case-gallery.yt-thumbs {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.case-yt-thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.case-yt-thumb img {
+  aspect-ratio: 16 / 9;
+}
+
+.case-yt-thumb .play-badge {
+  width: 2.6rem;
+  height: 2.6rem;
 }
 
 .case-next {
