@@ -122,7 +122,7 @@ const P = [
     gal: ["sonrie-carpet", "sonrie-festival"],
     story: [
       "A clown has lost the passion that once gave meaning to his work. Behind a character built to make others smile is someone struggling to find his own smile again.",
-      "A film about loneliness, lost passion and the search for meaning, and an important step in Ahmed’s development as a narrative filmmaker.",
+      "A film about loneliness, lost passion and the search for meaning, and an important step in Ahmed’s development as a narrative filmmaker. Official selection and Top 2 at Mix Film Festival Laval.",
     ],
     links: [
       ["Watch the film", "https://youtu.be/BeT4udZhZUc"],
@@ -169,7 +169,7 @@ const P = [
     loc: "L’Olympia de Montréal · Salle Désilets · RaÏFest",
     img: "concerts",
     story: [
-      "Two Soolking performances at L’Olympia de Montréal, plus festival work at RaÏFest. The goal is never just to film the artist, but the energy running between the stage and the room.",
+      "Worked with Soolking, an artist, across two nights at L’Olympia de Montréal, plus festival work at RaÏFest. The goal is never just to film the artist, but the energy running between the stage and the room.",
       "Artists, audience, backstage, reactions and the spontaneous moments in between, cut into a story that makes you feel you were there.",
     ],
     links: [["Start a brief", "#contact"]],
@@ -184,7 +184,7 @@ const P = [
     img: "amine",
     wide: true,
     story: [
-      "Amine Radi’s 2026 Montréal tour: capturing a comedian’s energy, personality and timing across multiple shows.",
+      "Worked with Amine Radi, a comedian, on the 2026 Montréal tour: capturing energy, personality and timing across multiple shows.",
       "Live comedy demands fast decisions and an ear for rhythm, so the cut keeps the spontaneity that makes the room laugh.",
     ],
     links: [["Start a brief", "#contact"]],
@@ -198,7 +198,7 @@ const P = [
     loc: "Place Bell, Laval · Centre Vidéotron, Québec",
     img: "mirabel",
     story: [
-      "Arena stand-up: catching one performer’s personality while keeping the energy of thousands of people living the same moment.",
+      "Worked with Paul Mirabel, a stand-up comedian, on arena dates at Place Bell and Centre Vidéotron: catching one performer’s personality while keeping the energy of thousands of people living the same moment.",
       "Further live comedy work includes Meriem Benoua (Montréal, 2026) and Camille Lorente (Montréal, 2025).",
     ],
     links: [["Start a brief", "#contact"]],

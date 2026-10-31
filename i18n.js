@@ -27,6 +27,20 @@
       heroScroll: "Scroll",
       reelLabel: "Opening reel",
       creditsLbl: "Selected collaborators",
+      proofKicker: "In the room",
+      proofTitle: 'Worked with artists the room already <em>knows</em>.',
+      proofLede:
+        "Named collaborators and venues from the slate. Festival recognition only where verified.",
+      proof1:
+        "<strong>Soolking</strong>, an artist. Two nights at L'Olympia de Montréal. Director, audiovisual production.",
+      proof2:
+        "<strong>Amine Radi</strong>, a comedian. Montréal tour, 2026. Director / Filmmaker.",
+      proof3:
+        "<strong>Paul Mirabel</strong>, a stand-up comedian. Arena dates at Place Bell and Centre Vidéotron. Filmmaker.",
+      proof4:
+        "<strong>Sonrié</strong>, directed by Ahmed. Top 2 at Mix Film Festival Laval.",
+      proof5:
+        "<strong>Music videos</strong> for Yacine Yafsah, Said Saidj and Inder Khedewala. More than one million views across projects.",
       workKicker: "Selected work",
       workTitle: 'Frames that carry a <em>feeling</em>',
       workLede:
@@ -42,8 +56,9 @@
       filmsKicker: "Signature films",
       filmsTitle: 'Two short <em>films</em>',
       filmsLede:
-        "Written and directed by Ahmed. Stories about belonging, passion and the space between what we show and what we feel.",
+        "Written and directed by Ahmed. Sonrié placed Top 2 at Mix Film Festival Laval. Stories about belonging, passion and the space between what we show and what we feel.",
       edmMeta: "Short film · Fiction · Montréal",
+      edmCredit: "Written and directed by Ahmed Mokrane",
       edmP1: "An immigrant student in Montréal, building a new life while still tied to the one he left.",
       edmP2:
         "The film treats immigration as an emotional journey as much as a geographic one: the feeling of living between two realities at once. Identity, belonging and the quiet weight of distance.",
@@ -52,23 +67,31 @@
       watchFilm: "Watch the film",
       watchTeaser: "Watch the teaser",
       sonMeta: "Short film · Fiction · Dominican Republic",
+      sonFestHero: "Top 2 · Mix Film Festival Laval",
+      sonFest: "Top 2 · Mix Film Festival Laval",
+      sonFestNote: "Festival recognition for a short film written and directed by Ahmed.",
+      sonStill1: "Mix Film Festival Laval · red carpet",
+      sonStill2: "Mix Film Festival Laval · official backdrop",
       sonP1:
         "A clown who has lost the passion that once gave his work meaning. His job is to make people smile; he can no longer find his own.",
       sonP2:
-        "Shot in the Dominican Republic, it is a film about loneliness, lost purpose and the search for meaning, and a turning point in Ahmed's work as a narrative director.",
+        "Shot in the Dominican Republic, it is a film about loneliness, lost purpose and the search for meaning, and a turning point in Ahmed's work as a narrative director. Official selection and Top 2 at Mix Film Festival Laval.",
       laurelSmall: "Official selection",
       liveKicker: "Live productions",
       liveTitle: 'The room is part of the <em>story</em>',
       liveLede:
-        "Concerts and comedy where the camera anticipates the moment before it happens: stage, crowd, backstage and the reactions in between.",
+        "Concerts and comedy where the camera anticipates the moment before it happens: stage, crowd, backstage and the reactions in between. Worked with artists the audience already came to see.",
       soolkingMeta: "Concert · Multi-cam",
-      soolkingBody: "L'Olympia de Montréal · two shows. Director, audiovisual production.",
+      soolkingWorked: "Worked with Soolking, an artist",
+      soolkingBody: "Two nights at L'Olympia de Montréal. Director, audiovisual production.",
       amineMeta: "Live comedy · 2026",
+      amineWorked: "Worked with Amine Radi, a comedian",
       amineBody: "Montréal tour. Director / Filmmaker.",
       mirabelMeta: "Stand-up · Arena",
-      mirabelBody: "Place Bell, Laval · Centre Vidéotron, Québec. Filmmaker.",
+      mirabelWorked: "Worked with Paul Mirabel, a stand-up comedian",
+      mirabelBody: "Arena dates at Place Bell, Laval and Centre Vidéotron, Québec. Filmmaker.",
       raifestMeta: "Festival",
-      raifestBody: "Montréal. Director / Filmmaker.",
+      raifestBody: "Montréal festival coverage. Director / Filmmaker.",
       meriemMeta: "Live comedy · 2026",
       meriemBody: "Montréal. Filmmaker.",
       camilleMeta: "Live comedy · 2025",
@@ -77,7 +100,8 @@
       desiletsBody: "Concert series. Director / Filmmaker.",
       mvKicker: "Music videos",
       mvTitle: 'Give the song a <em>face</em>',
-      mvLede: "Concept, filming and final cut. A visual world built around each artist.",
+      mvLede:
+        "Concept, filming and final cut for artists including Yacine Yafsah, Said Saidj and Inder Khedewala. A visual world built around each track.",
       mvViews: "views across music video projects",
       mvRole: "Creative direction · Cinematography · Post",
       mvBody1: "Full creative direction and production, from concept to final cut.",
@@ -271,6 +295,20 @@
       heroScroll: "Défiler",
       reelLabel: "Reel d'ouverture",
       creditsLbl: "Collaborations choisies",
+      proofKicker: "Dans la salle",
+      proofTitle: 'A travaillé avec des artistes que la salle <em>connaît</em> déjà.',
+      proofLede:
+        "Collaborateurs et lieux nommés d'après la slate. Reconnaissance festivalière seulement là où elle est vérifiée.",
+      proof1:
+        "<strong>Soolking</strong>, un artiste. Deux soirées à L'Olympia de Montréal. Réalisation, production audiovisuelle.",
+      proof2:
+        "<strong>Amine Radi</strong>, un humoriste. Tournée montréalaise, 2026. Réalisateur / Filmmaker.",
+      proof3:
+        "<strong>Paul Mirabel</strong>, un humoriste de stand-up. Dates en aréna à Place Bell et au Centre Vidéotron. Filmmaker.",
+      proof4:
+        "<strong>Sonrié</strong>, réalisé par Ahmed. Top 2 au Mix Film Festival Laval.",
+      proof5:
+        "<strong>Clips</strong> pour Yacine Yafsah, Said Saidj et Inder Khedewala. Plus d'un million de vues au total.",
       workKicker: "Travail sélectionné",
       workTitle: 'Des images qui portent un <em>sentiment</em>',
       workLede:
@@ -286,8 +324,9 @@
       filmsKicker: "Films signatures",
       filmsTitle: 'Deux courts <em>métrages</em>',
       filmsLede:
-        "Écrits et réalisés par Ahmed. Des récits sur l'appartenance, la passion et l'espace entre ce que l'on montre et ce que l'on ressent.",
+        "Écrits et réalisés par Ahmed. Sonrié s'est classé Top 2 au Mix Film Festival Laval. Des récits sur l'appartenance, la passion et l'espace entre ce que l'on montre et ce que l'on ressent.",
       edmMeta: "Court métrage · Fiction · Montréal",
+      edmCredit: "Écrit et réalisé par Ahmed Mokrane",
       edmP1:
         "Un étudiant immigrant à Montréal, qui construit une nouvelle vie tout en restant lié à celle qu'il a quittée.",
       edmP2:
@@ -297,23 +336,31 @@
       watchFilm: "Voir le film",
       watchTeaser: "Voir le teaser",
       sonMeta: "Court métrage · Fiction · République dominicaine",
+      sonFestHero: "Top 2 · Mix Film Festival Laval",
+      sonFest: "Top 2 · Mix Film Festival Laval",
+      sonFestNote: "Reconnaissance festivalière pour un court métrage écrit et réalisé par Ahmed.",
+      sonStill1: "Mix Film Festival Laval · tapis rouge",
+      sonStill2: "Mix Film Festival Laval · toile officielle",
       sonP1:
         "Un clown qui a perdu la passion qui donnait un sens à son travail. Son métier est de faire sourire les autres; il ne retrouve plus le sien.",
       sonP2:
-        "Tourné en République dominicaine, c'est un film sur la solitude, la perte de sens et la quête de sens, et un tournant dans le travail narratif d'Ahmed.",
+        "Tourné en République dominicaine, c'est un film sur la solitude, la perte de sens et la quête de sens, et un tournant dans le travail narratif d'Ahmed. Sélection officielle et Top 2 au Mix Film Festival Laval.",
       laurelSmall: "Sélection officielle",
       liveKicker: "Productions live",
       liveTitle: 'La salle fait partie de l\'<em>histoire</em>',
       liveLede:
-        "Concerts et humour où la caméra anticipe l'instant avant qu'il n'arrive: la scène, la foule, les coulisses et les réactions entre les deux.",
+        "Concerts et humour où la caméra anticipe l'instant avant qu'il n'arrive: la scène, la foule, les coulisses et les réactions entre les deux. Avec des artistes que le public est déjà venu voir.",
       soolkingMeta: "Concert · Multi-cam",
-      soolkingBody: "L'Olympia de Montréal · deux spectacles. Réalisation, production audiovisuelle.",
+      soolkingWorked: "A travaillé avec Soolking, un artiste",
+      soolkingBody: "Deux soirées à L'Olympia de Montréal. Réalisation, production audiovisuelle.",
       amineMeta: "Humour live · 2026",
+      amineWorked: "A travaillé avec Amine Radi, un humoriste",
       amineBody: "Tournée montréalaise. Réalisateur / Filmmaker.",
       mirabelMeta: "Stand-up · Aréna",
-      mirabelBody: "Place Bell, Laval · Centre Vidéotron, Québec. Filmmaker.",
+      mirabelWorked: "A travaillé avec Paul Mirabel, un humoriste de stand-up",
+      mirabelBody: "Dates en aréna à Place Bell, Laval et au Centre Vidéotron, Québec. Filmmaker.",
       raifestMeta: "Festival",
-      raifestBody: "Montréal. Réalisateur / Filmmaker.",
+      raifestBody: "Couverture festivalière à Montréal. Réalisateur / Filmmaker.",
       meriemMeta: "Humour live · 2026",
       meriemBody: "Montréal. Filmmaker.",
       camilleMeta: "Humour live · 2025",
@@ -322,7 +369,8 @@
       desiletsBody: "Série de concerts. Réalisateur / Filmmaker.",
       mvKicker: "Clips",
       mvTitle: 'Donner un <em>visage</em> à la chanson',
-      mvLede: "Concept, tournage et montage final. Un monde visuel autour de chaque artiste.",
+      mvLede:
+        "Concept, tournage et montage final pour des artistes comme Yacine Yafsah, Said Saidj et Inder Khedewala. Un monde visuel autour de chaque titre.",
       mvViews: "vues sur les projets de clips",
       mvRole: "Direction créative · Image · Postproduction",
       mvBody1: "Direction créative et production complètes, du concept au montage final.",
@@ -529,7 +577,7 @@
       ],
       sonrie: [
         "Un clown a perdu la passion qui donnait un sens à son travail. Derrière un personnage bâti pour faire sourire les autres, quelqu'un cherche à retrouver le sien.",
-        "Un film sur la solitude, la passion perdue et la quête de sens, et une étape importante dans le parcours narratif d'Ahmed.",
+        "Un film sur la solitude, la passion perdue et la quête de sens, et une étape importante dans le parcours narratif d'Ahmed. Sélection officielle et Top 2 au Mix Film Festival Laval.",
       ],
       humanite: [
         "Un long métrage réalisé par Rida Amrani. Ahmed l'a monté et étalonné, façonnant le ton visuel du film, de la salle de montage à l'image finale.",
@@ -539,15 +587,15 @@
         "Travail pour Yacine Yafsah, Said Saidj et Inder Khedewala, avec des collaborations sur la scène nord-africaine et internationale. Plus d'un million de vues au total.",
       ],
       concerts: [
-        "Deux spectacles de Soolking à L'Olympia de Montréal, plus le travail festivalier à RaÏFest. Le but n'est jamais seulement de filmer l'artiste, mais l'énergie entre la scène et la salle.",
+        "A travaillé avec Soolking, un artiste, sur deux soirées à L'Olympia de Montréal, plus le travail festivalier à RaÏFest. Le but n'est jamais seulement de filmer l'artiste, mais l'énergie entre la scène et la salle.",
         "Artistes, public, coulisses, réactions et moments spontanés, montés en une histoire qui fait sentir qu'on y était.",
       ],
       "amine-radi": [
-        "La tournée montréalaise 2026 d'Amine Radi: capturer l'énergie, la personnalité et le timing d'un humoriste sur plusieurs spectacles.",
+        "A travaillé avec Amine Radi, un humoriste, sur la tournée montréalaise 2026: capturer l'énergie, la personnalité et le timing sur plusieurs spectacles.",
         "L'humour live demande des décisions rapides et une oreille pour le rythme, pour que le montage garde la spontanéité qui fait rire la salle.",
       ],
       "paul-mirabel": [
-        "Stand-up en aréna: saisir la personnalité d'un interprète tout en gardant l'énergie de milliers de personnes vivant le même moment.",
+        "A travaillé avec Paul Mirabel, un humoriste de stand-up, sur des dates en aréna à Place Bell et au Centre Vidéotron: saisir la personnalité d'un interprète tout en gardant l'énergie de milliers de personnes vivant le même moment.",
         "D'autres projets d'humour live incluent Meriem Benoua (Montréal, 2026) et Camille Lorente (Montréal, 2025).",
       ],
       "dominican-republic": [
