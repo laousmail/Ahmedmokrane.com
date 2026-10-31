@@ -201,21 +201,24 @@ const P = [
   },
 ];
 
-/* ---------- work index ---------- */
+/* ---------- editorial portfolio ---------- */
 const idx = document.getElementById("index");
-const arrow =
-  '<svg class="arw" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 9h14M10 3l6 6-6 6"/></svg>';
-idx.innerHTML = P.map(
-  (p, i) => `<li data-f="${p.f}"><button data-id="${p.id}" data-img="${p.img}">
-  <img class="thumb" src="img/${p.img}.webp" alt="" loading="lazy">
-  <span class="no">${String(i + 1).padStart(2, "0")}</span><span class="t">${p.t}</span><span class="c">${p.c}</span><span class="r">${p.r}</span>${arrow}</button></li>`
-).join("");
+const layout = ["", "wide", "tall", "", "wide", "", "tall", "", "wide", ""];
+idx.innerHTML = P.map((p, i) => {
+  const cls = ["folio-item", layout[i] || ""].filter(Boolean).join(" ");
+  return `<article class="${cls}" data-f="${p.f}">
+    <button type="button" data-id="${p.id}" data-img="${p.img}" aria-label="Open ${p.t}">
+      <div class="thumb"><img src="img/${p.img}.webp" alt="" loading="${i < 3 ? "eager" : "lazy"}"></div>
+      <div class="meta"><span class="t">${p.t}</span><span class="c">${p.c}</span><span class="r">${p.r}</span></div>
+    </button>
+  </article>`;
+}).join("");
 
 document.querySelectorAll(".filters .chip").forEach((b) =>
   b.addEventListener("click", () => {
     document.querySelectorAll(".filters .chip").forEach((x) => x.setAttribute("aria-pressed", x === b));
     const f = b.dataset.f;
-    idx.querySelectorAll("li").forEach((li) => (li.hidden = !(f === "all" || li.dataset.f === f)));
+    idx.querySelectorAll("article").forEach((el) => (el.hidden = !(f === "all" || el.dataset.f === f)));
   })
 );
 
@@ -310,7 +313,16 @@ function renderCase(p) {
   );
 }
 function openFromHash() {
-  const p = P.find((x) => x.id === location.hash.slice(1));
+  const id = location.hash.slice(1);
+  const sig = id && document.getElementById(id);
+  if (sig && sig.classList.contains("sig")) {
+    if (!caseEl.hidden) {
+      caseEl.hidden = true;
+      document.body.style.overflow = "";
+    }
+    return;
+  }
+  const p = P.find((x) => x.id === id);
   if (p) {
     if (caseEl.hidden) lastFocus = document.activeElement;
     renderCase(p);
@@ -490,16 +502,23 @@ form.addEventListener("submit", (e) => {
     form.querySelector("#f-msg").focus();
     return;
   }
+  const feel = (d.get("feel") || "").trim();
+  if (!feel) {
+    err.textContent = "Share what you want the audience to feel.";
+    form.querySelector("#f-feel").focus();
+    return;
+  }
   err.textContent = "";
   const co = (d.get("co") || "").trim();
   const date = (d.get("date") || "").trim();
-  const text = `Hi Ahmed,\n\nProject: ${ptype}\nFrom: ${name}${co ? " · " + co : ""}\nReply to: ${mail}\nShoot date: ${date || "Flexible"}\nBudget: ${d.get("budget")}\n\n${msg}\n`;
+  const text = `Hi Ahmed,\n\nProject: ${ptype}\nFrom: ${name}${co ? " · " + co : ""}\nReply to: ${mail}\nShoot date: ${date || "Flexible"}\nBudget: ${d.get("budget")}\n\nProject description:\n${msg}\n\nWhat should the audience feel?\n${feel}\n`;
   document.getElementById("briefText").textContent = text;
   document.getElementById("mailBrief").href =
     "mailto:ahmedmkrne@gmail.com?subject=" +
     encodeURIComponent(ptype + " inquiry · " + name) +
     "&body=" +
     encodeURIComponent(text);
+  say("Brief ready");
   const out = document.getElementById("briefOut");
   out.hidden = false;
   out.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
@@ -529,73 +548,61 @@ if (!reduce && "IntersectionObserver" in window) {
   });
 }
 
-/* ---------- REEL: early pinned camera scrub (brand fades into viewfinder) ---------- */
+/* ---------- REEL: cinematic scrub with softened camera language ---------- */
 const TAKES = [
   {
-    label: "Take 01 · Slate",
+    label: "Frame 01",
     title: "Mark the frame.",
-    sub: "Letterbox closes. The viewfinder wakes.",
+    sub: "The image finds its ratio.",
     ratio: 2.39,
     read: "ISO 800 · T2.8 · 23.976",
     ar: "2.39:1",
-    peaking: 0,
-    guides: 0.3,
-    cross: 0,
+    guides: 0.25,
   },
   {
-    label: "Take 02 · Live",
+    label: "Frame 02 · Live",
     title: "The room is rolling.",
-    sub: "REC · timecode · aperture readouts lock on.",
+    sub: "Stage, crowd and the space between.",
     ratio: 1.85,
     read: "ISO 1600 · T2.0 · 23.976",
     ar: "1.85:1",
-    peaking: 0,
-    guides: 1,
-    cross: 1,
+    guides: 0.55,
   },
   {
-    label: "Take 03 · Fiction",
+    label: "Frame 03 · Fiction",
     title: "Entre Deux Mondes.",
-    sub: "Focus peaking finds the edge between two worlds.",
+    sub: "Between two realities at once.",
     ratio: 2.39,
     read: "ISO 800 · T1.8 · 23.976",
     ar: "2.39:1",
-    peaking: 1,
-    guides: 1,
-    cross: 0.4,
+    guides: 0.7,
   },
   {
-    label: "Take 04 · Sonrié",
+    label: "Frame 04 · Sonrié",
     title: "A smile, lost then found.",
     sub: "Top 2 · Mix Film Festival Laval.",
     ratio: 1.33,
     read: "ISO 400 · T4 · 24.000",
     ar: "1.33:1",
-    peaking: 0.35,
-    guides: 1,
-    cross: 1,
+    guides: 0.65,
   },
   {
-    label: "Take 05 · Music",
+    label: "Frame 05 · Music",
     title: "Give the song a face.",
-    sub: "1M+ views across music video projects.",
+    sub: "A visual world for the track.",
     ratio: 0.8,
     read: "ISO 3200 · T2.2 · 23.976",
     ar: "4:5",
-    peaking: 0,
-    guides: 0.6,
-    cross: 0,
+    guides: 0.4,
   },
   {
-    label: "Take 06 · Cut",
-    title: "Scrub the timeline.",
-    sub: "NLE playhead, clips, waveform: then the work below.",
+    label: "Frame 06",
+    title: "Continue below.",
+    sub: "Selected work, films and the brief.",
     ratio: 1.78,
     read: "ISO 800 · T2.8 · 23.976",
     ar: "16:9",
-    peaking: 0,
     guides: 0.2,
-    cross: 0,
   },
 ];
 
@@ -634,9 +641,7 @@ function setBeat(i, progressWithin = 0) {
   document.getElementById("camRead").textContent = take.read;
   document.getElementById("arRead").textContent = take.ar;
   document.getElementById("scopeBeat").textContent = String(i + 1).padStart(2, "0");
-  document.getElementById("peaking").style.opacity = take.peaking;
   document.getElementById("guides").style.opacity = take.guides;
-  document.getElementById("cross").style.opacity = take.cross;
   applyMattes(take.ratio);
 
   document.querySelectorAll("#beatRail span").forEach((s, n) => s.classList.toggle("on", n === i));
@@ -666,7 +671,20 @@ function initReel() {
   const heroImg = document.getElementById("heroImg");
 
   if (!reduce && heroImg && typeof gsap !== "undefined") {
-    gsap.to(heroImg, { scale: 1.1, duration: 18, ease: "none", yoyo: true, repeat: -1 });
+    gsap.fromTo(heroImg, { scale: 1.08 }, { scale: 1.14, duration: 22, ease: "none", yoyo: true, repeat: -1 });
+    gsap.to(".reveal-line", {
+      opacity: 1,
+      y: 0,
+      duration: 1.05,
+      stagger: 0.1,
+      ease: "power2.out",
+      delay: 0.15,
+    });
+  } else {
+    document.querySelectorAll(".reveal-line").forEach((el) => {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+    });
   }
 
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
@@ -730,17 +748,19 @@ function initReel() {
       const i = Math.min(beats - 1, Math.floor(raw));
       const local = raw - i;
 
-      const intro = Math.min(1, scrubP / 0.1);
-      gsap.set(hudTop, { opacity: intro * brandOut, y: 8 * (1 - intro) });
-      gsap.set(hudBot, { opacity: intro * brandOut, y: 8 * (1 - intro) });
+      // Softened HUD: present but quieter than brand stage
+      const intro = Math.min(1, scrubP / 0.12);
+      const soft = 0.55;
+      gsap.set(hudTop, { opacity: intro * brandOut * soft, y: 8 * (1 - intro) });
+      gsap.set(hudBot, { opacity: intro * brandOut * soft, y: 8 * (1 - intro) });
       gsap.set(takeLabel, { opacity: intro * brandOut, y: 10 * (1 - intro) });
       gsap.set(takeTitle, { opacity: intro * brandOut, y: 16 * (1 - intro) });
-      gsap.set(takeSub, { opacity: intro * 0.95 * brandOut, y: 12 * (1 - intro) });
-      gsap.set(beatRail, { opacity: intro * brandOut });
+      gsap.set(takeSub, { opacity: intro * 0.9 * brandOut, y: 12 * (1 - intro) });
+      gsap.set(beatRail, { opacity: intro * brandOut * 0.85 });
 
-      const scopesOn = Math.min(1, Math.max(0, (scrubP - 0.12) / 0.1)) * brandOut;
+      const scopesOn = Math.min(1, Math.max(0, (scrubP - 0.15) / 0.12)) * brandOut * 0.65;
       gsap.set(scopeRail, { opacity: scopesOn });
-      const tlOn = Math.min(1, Math.max(0, (scrubP - 0.18) / 0.12)) * brandOut;
+      const tlOn = Math.min(1, Math.max(0, (scrubP - 0.22) / 0.14)) * brandOut * 0.8;
       gsap.set(timelineStrip, { opacity: tlOn });
 
       lastBeat = i;
