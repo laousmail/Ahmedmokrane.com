@@ -1320,6 +1320,28 @@ section {
   gap: 0.65rem;
 }
 
+.films-sound {
+  margin-top: 1.15rem;
+  color: var(--dim);
+  font-size: 0.98rem;
+  max-width: 42ch;
+}
+
+.films-sound a,
+.facts a,
+.case-side a {
+  color: var(--bone);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(232, 226, 214, 0.35);
+}
+
+.films-sound a:hover,
+.facts a:hover,
+.case-side a:hover {
+  border-bottom-color: var(--copper);
+  color: var(--copper);
+}
+
 .sig-credit,
 .sig-fest {
   margin-top: 0.65rem;

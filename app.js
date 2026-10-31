@@ -100,6 +100,7 @@ const P = [
     r: "Writer, Director",
     loc: "Montréal",
     img: "edm",
+    sound: true,
     gal: ["edm-1", "edm-2", "edm-3", "edm-4"],
     story: [
       "An immigrant student in Montréal, building a new life while still emotionally tied to the one he left behind.",
@@ -119,6 +120,7 @@ const P = [
     loc: "Dominican Republic",
     award: "Top 2 · Mix Film Festival Laval",
     img: "sonrie",
+    sound: true,
     gal: ["sonrie-carpet", "sonrie-festival"],
     story: [
       "A clown has lost the passion that once gave meaning to his work. Behind a character built to make others smile is someone struggling to find his own smile again.",
@@ -385,6 +387,14 @@ function renderCase(raw) {
         <dl class="facts" style="margin:0;border:0;padding:0;grid-template-columns:1fr">
           <div><dt>${tr("role")}</dt><dd>${p.r}</dd></div><div><dt>${tr("caseWhere")}</dt><dd>${p.loc}</dd></div>${
             p.award ? `<div><dt>${tr("caseRecognition")}</dt><dd style="color:var(--tungsten)">${p.award}</dd></div>` : ""
+          }${
+            raw.sound
+              ? `<div><dt>${tr("creditSound")}</dt><dd>${
+                  window.AM && window.AM.t
+                    ? window.AM.t("creditSoundBy")
+                    : 'Smail Laouchedi · <a href="https://eclipsetone.com" target="_blank" rel="noopener">Eclipse Tone</a>'
+                }</dd></div>`
+              : ""
           }
         </dl>
         ${

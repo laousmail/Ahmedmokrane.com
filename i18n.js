@@ -57,6 +57,11 @@
       filmsTitle: 'Two short <em>films</em>',
       filmsLede:
         "Written and directed by Ahmed. Sonrié placed Top 2 at Mix Film Festival Laval. Stories about belonging, passion and the space between what we show and what we feel.",
+      filmsSound:
+        'Sound design and score by Smail Laouchedi · <a href="https://eclipsetone.com" target="_blank" rel="noopener">Eclipse Tone</a>',
+      creditSound: "Sound design & score",
+      creditSoundBy:
+        'Smail Laouchedi · <a href="https://eclipsetone.com" target="_blank" rel="noopener">Eclipse Tone</a>',
       edmMeta: "Short film · Fiction · Montréal",
       edmCredit: "Written and directed by Ahmed Mokrane",
       edmP1: "An immigrant student in Montréal, building a new life while still tied to the one he left.",
@@ -325,6 +330,11 @@
       filmsTitle: 'Deux courts <em>métrages</em>',
       filmsLede:
         "Écrits et réalisés par Ahmed. Sonrié s'est classé Top 2 au Mix Film Festival Laval. Des récits sur l'appartenance, la passion et l'espace entre ce que l'on montre et ce que l'on ressent.",
+      filmsSound:
+        'Design sonore et musique de Smail Laouchedi · <a href="https://eclipsetone.com" target="_blank" rel="noopener">Eclipse Tone</a>',
+      creditSound: "Design sonore et musique",
+      creditSoundBy:
+        'Smail Laouchedi · <a href="https://eclipsetone.com" target="_blank" rel="noopener">Eclipse Tone</a>',
       edmMeta: "Court métrage · Fiction · Montréal",
       edmCredit: "Écrit et réalisé par Ahmed Mokrane",
       edmP1:
